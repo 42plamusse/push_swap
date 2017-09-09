@@ -1,3 +1,7 @@
+PUSH_SWAP
+
+
+
 Le projet Push_swap est un projet d’algo simple et efficace : il faut trier. Vous avez
 à votre disposition un ensemble d’entiers, deux piles, et un ensemble d’instructions pour
 manipuler les piles.
