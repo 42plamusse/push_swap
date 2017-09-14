@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 20:47:46 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/14 10:09:06 by plamusse         ###   ########.fr       */
+/*   Updated: 2017/09/14 12:56:34 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ struct					s_double
 	int			cur;
 	int			srtd;
 	int			prio;
-	int			asize;
-	int			bsize;
 	t_double	*next;
 	t_double	*prev;
 };
