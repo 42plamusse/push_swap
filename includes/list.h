@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 20:47:46 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/13 18:05:36 by plamusse         ###   ########.fr       */
+/*   Updated: 2017/09/14 10:09:06 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@
 typedef struct s_double	t_double;
 struct					s_double
 {
-	int		elem;
-	int		cur;
-	int		srtd;
-	int		prio;
-	int		asize;
-	int		bsize;
-	t_list	*next;
-	t_list	*prev;
+	int			elem;
+	int			cur;
+	int			srtd;
+	int			prio;
+	int			asize;
+	int			bsize;
+	t_double	*next;
+	t_double	*prev;
 };
 
 #endif
