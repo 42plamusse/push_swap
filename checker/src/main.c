@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 20:33:11 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/13 03:09:12 by plamusse         ###   ########.fr       */
+/*   Updated: 2017/09/13 21:02:32 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		main(int argc, char *argv[])
 	t_double	**a;
 	t_double	**b;
 
-	if (parser(argc, argv, a, b) == -1)
+	if (init_ab(argc, argv, a, b) == -1)
 		return (0);
 	exec_instruc(a, b);
 	double_lstdel(a);

@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 19:24:13 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/13 21:02:30 by plamusse         ###   ########.fr       */
+/*   Updated: 2017/09/13 20:46:17 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 
 int		init_ab(int argc, char *argv[], t_double **a, t_double **b)
 {
-	if (!argc
 
 }
