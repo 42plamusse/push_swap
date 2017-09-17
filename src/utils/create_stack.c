@@ -6,11 +6,35 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 19:24:13 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/14 13:44:50 by plamusse         ###   ########.fr       */
+/*   Updated: 2017/09/17 18:16:37 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/list.h"
+
+static int		parse(char *elem, t_flags *flags)
+{
+	long long	tmp;
+	int			i;
+	int			sign;
+
+	i = 0;
+	if ((sign = 1) && elem[i] == '-')
+	{
+		sign = -1;
+		i++;
+	}
+	tmp = 0;
+	while (elem[i] && ft_isdigit(elem[i]))
+		tmp = tmp * 10 + (elem[i++] - '0');
+	if (elem[i] || (tmp > 2147483647 && sign > 0) ||
+					(tmp > 2147483648 && sign < 0))
+	{
+		print_err("elem", flags);
+		return (-1);
+	}
+	return (1);
+}
 
 static t_double	*create_node(char *elem, t_double **a, int pos, t_flags *flags)
 {
@@ -23,9 +47,19 @@ static t_double	*create_node(char *elem, t_double **a, int pos, t_flags *flags)
 	new->cur = pos;
 	new->strd = 0;
 	new->prio = 0;
-	new->next = (*a) ? *a : NULL;
-	new->prev = (*a) ? a->prev : NULL;
-	(*a)->prev = new;
+	if (!(*a))
+	{
+		*a = new;
+		new->prev = *a;
+		new->next = *a;
+	}
+	else
+	{
+		(*a)->prev->next = new;
+		new->prev = (*a)->prev;
+		new->next = *a;
+		(*a)->prev = new;
+	}
 	return (new);
 }
 
@@ -35,7 +69,7 @@ static int		stock_elem(char *elem, t_double **a, int pos, t_flags *flags)
 	t_double	*new;
 	int			i;
 
-	if (parse(elem) == -1)
+	if (parse(elem, flags) == -1)
 		return (-1);
 	if ((new = create_node(elem, a, pos, flags)) == NULL)
 		return (-1);

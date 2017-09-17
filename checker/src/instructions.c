@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 00:55:23 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/14 07:01:58 by plamusse         ###   ########.fr       */
+/*   Updated: 2017/09/17 19:42:22 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,13 @@ static int		instr_index(char *instr)
 static void		check_sorted(t_double **a, t_double **b)
 {
 	int			i;
+	t_double	tmp;
 
 	i = 0;
-	while (*a && i == a->srtd && i < a->asize)
+	tmp = *a;
+	while (tmp && i == tmp->srtd && i < tmp->asize)
+	{
+
 		i++;
 	if (i == a->asize && !(*b))
 		ft_printf("OK\n");
