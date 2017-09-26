@@ -6,20 +6,21 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 19:24:13 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/17 18:16:37 by plamusse         ###   ########.fr       */
+/*   Updated: 2017/09/25 21:53:09 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/list.h"
 
-static int		parse(char *elem, t_flags *flags)
+static int		parse(char *elem)
 {
 	long long	tmp;
 	int			i;
 	int			sign;
 
 	i = 0;
-	if ((sign = 1) && elem[i] == '-')
+	sign = 1;
+	if (elem[i] == '-')
 	{
 		sign = -1;
 		i++;
@@ -30,17 +31,21 @@ static int		parse(char *elem, t_flags *flags)
 	if (elem[i] || (tmp > 2147483647 && sign > 0) ||
 					(tmp > 2147483648 && sign < 0))
 	{
-		print_err("elem", flags);
+		ft_printf("elem\n");
+		//print_err("elem", flags);
 		return (-1);
 	}
 	return (1);
 }
 
-static t_double	*create_node(char *elem, t_double **a, int pos, t_flags *flags)
+static t_double	*create_node(char *elem, t_double **a, int pos)
 {
+	t_double	*new;
+
 	if (!(new = (*t_double)malloc(sizeof(t_double))))
 	{
-		print_err("malloc", flags);
+		ft_printf("malloc\n");
+		//print_err("malloc", flags);
 		return (NULL);
 	}
 	new->elem = ft_atoi(elem);
@@ -63,7 +68,7 @@ static t_double	*create_node(char *elem, t_double **a, int pos, t_flags *flags)
 	return (new);
 }
 
-static int		stock_elem(char *elem, t_double **a, int pos, t_flags *flags)
+static int		stock_elem(char *elem, t_double **a, int pos)
 {
 	t_double	*tmp;
 	t_double	*new;
@@ -79,7 +84,8 @@ static int		stock_elem(char *elem, t_double **a, int pos, t_flags *flags)
 	{
 		if (new->elem == tmp->elem)
 		{
-			print_err("duplicate", flags);
+			ft_printf("duplicate\n");
+			//print_err("duplicate", flags);
 			return (-1);
 		}
 		i++;
@@ -88,7 +94,7 @@ static int		stock_elem(char *elem, t_double **a, int pos, t_flags *flags)
 	return (1);
 }
 
-int				create_stack(int argc, char *argv[], t_double **a, t_flags *flags)
+int				create_stack(int argc, char *argv[], t_double **a)
 {
 	int			i;
 

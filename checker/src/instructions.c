@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 00:55:23 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/17 19:42:22 by plamusse         ###   ########.fr       */
+/*   Updated: 2017/09/26 13:04:10 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,9 @@ void			exec_instruc(t_double **a, t_double **b)
 			funp[i](a, b);
 	}
 	if (ret == -1 || i == -1)
+	{
+		ft_printf("error\n");
 		return ;
+	}
 	check_sorted(a, b);
 }
