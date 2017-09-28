@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   rev_rotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/09 20:33:11 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/26 13:04:37 by plamusse         ###   ########.fr       */
+/*   Created: 2017/09/27 12:15:29 by plamusse          #+#    #+#             */
+/*   Updated: 2017/09/28 15:44:56 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "../includes/utils.h"
 
-int		main(int argc, char *argv[])
+void	rev_rotate_a(t_double **a, t_double **b)
 {
-	int			i;
-	t_double	**a;
-	t_double	**b;
-	t_flags		flags;
+	t_double	**tmp;
 
-	//init_flags(argc, argv, &flags);
-	if (create_stack(argc, argv, a, flags) == -1)
-		return (0);
-	exec_instruc(a, b);
-	double_lstdel(a);
-	double_lstdel(b);
-	return (0);
+	*a = (*a)->prev;
+	tmp = b;
+}
+
+void	rev_rotate_b(t_double **a, t_double **b)
+{
+	t_double	**tmp;
+
+	*b = (*b)->prev;
+	tmp = a;
+}
+
+void	rev_rotate_ab(t_double **a, t_double **b)
+{
+	*a = (*a)->prev;
+	*b = (*b)->prev;
 }

@@ -6,24 +6,26 @@
 #    By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/17 14:39:22 by plamusse          #+#    #+#              #
-#    Updated: 2017/09/27 23:13:14 by plamusse         ###   ########.fr        #
+#    Updated: 2017/09/28 15:45:46 by plamusse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-NAME		= checker
 
 # directories
 SRC_DIR		= ./src
 INC_DIR		= ./includes
 OBJ_DIR		= ./obj
-LIB_DIR		= ../libft
+LIB_DIR		= ./libft
 
 # src / obj files
 
-SRC			= main.c \
-			  instruction.c \
-			  
-			 
+SRC			= checker.c \
+			  instructions.c \
+			  create_stack.c \
+			  push.c \
+			  swap.c \
+			  rotate.c \
+			  rev_rotate.c \
+			  lstdel.c
 
 OBJ			= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
@@ -36,7 +38,7 @@ L_FT		= $(LIB_DIR)
 LIB_LNK		= -L $(L_FT) -lft
 LIB_INC		= $(L_FT)/includes
 
-all: $(NAME)
+all: checker
 
 $(OBJ_DIR):
 	mkdir -p $@
@@ -44,10 +46,9 @@ $(OBJ_DIR):
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c $(INC_DIR)/checker.h
 	$(CC) $(CFLAGS)  -o $@ -c $< -I $(INC_DIR)
 
-$(NAME): $(OBJ_DIR) $(OBJ)
+checker: $(OBJ_DIR) $(OBJ)
 	@$(MAKE) -C $(L_FT)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	$(CC) -o $@ $(OBJ) $(LIB_LNK)
 
 clean:
 	@$(MAKE) fclean -C $(L_FT)

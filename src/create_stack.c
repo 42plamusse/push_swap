@@ -6,11 +6,11 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 19:24:13 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/25 21:53:09 by plamusse         ###   ########.fr       */
+/*   Updated: 2017/09/28 18:06:17 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/list.h"
+#include "../includes/utils.h"
 
 static int		parse(char *elem)
 {
@@ -42,7 +42,7 @@ static t_double	*create_node(char *elem, t_double **a, int pos)
 {
 	t_double	*new;
 
-	if (!(new = (*t_double)malloc(sizeof(t_double))))
+	if (!(new = (t_double*)malloc(sizeof(t_double))))
 	{
 		ft_printf("malloc\n");
 		//print_err("malloc", flags);
@@ -50,21 +50,23 @@ static t_double	*create_node(char *elem, t_double **a, int pos)
 	}
 	new->elem = ft_atoi(elem);
 	new->cur = pos;
-	new->strd = 0;
+	new->srtd = 0;
 	new->prio = 0;
-	if (!(*a))
-	{
-		*a = new;
-		new->prev = *a;
-		new->next = *a;
-	}
-	else
+	if (*a)
 	{
 		(*a)->prev->next = new;
 		new->prev = (*a)->prev;
 		new->next = *a;
 		(*a)->prev = new;
 	}
+	else
+	{
+		*a = new;
+		new->prev = *a;
+		new->next = *a;
+	}
+	while (1)
+		;
 	return (new);
 }
 
@@ -74,9 +76,9 @@ static int		stock_elem(char *elem, t_double **a, int pos)
 	t_double	*new;
 	int			i;
 
-	if (parse(elem, flags) == -1)
+	if (parse(elem) == -1)
 		return (-1);
-	if ((new = create_node(elem, a, pos, flags)) == NULL)
+	if ((new = create_node(elem, a, pos)) == NULL)
 		return (-1);
 	tmp = *a;
 	i = 0;
@@ -98,14 +100,14 @@ int				create_stack(int argc, char *argv[], t_double **a)
 {
 	int			i;
 
-	i = flags->argc;
+	i = 1;
 	while (i < argc)
 	{
-		if (stock_elem(argv[i], a, (i - flags->argc), flags) == -1)
+		if (stock_elem(argv[i], a, i) == -1)
 		{
 			if (*a)
 				double_lstdel(a);
-			return (-1)
+			return (-1);
 		}
 		i++;
 	}

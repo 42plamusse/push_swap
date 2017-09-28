@@ -6,9 +6,11 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 16:00:43 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/27 16:34:32 by plamusse         ###   ########.fr       */
+/*   Updated: 2017/09/28 15:44:29 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../includes/utils.h"
 
 void	swap_a(t_double **a, t_double **b)
 {

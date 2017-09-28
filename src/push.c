@@ -6,9 +6,11 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 12:19:19 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/27 15:59:12 by plamusse         ###   ########.fr       */
+/*   Updated: 2017/09/28 15:45:29 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../includes/utils.h"
 
 void	push_a(t_double **a, t_double **b)
 {

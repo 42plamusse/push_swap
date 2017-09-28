@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 00:55:23 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/27 17:38:33 by plamusse         ###   ########.fr       */
+/*   Updated: 2017/09/28 15:39:19 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,9 @@
 **	Use:	Stores the address of each instruction function into an void array.
 */
 
-static void		*funp_init(void)
+static void		funp_init(void (**funp)())
 {
-	void	**funp;
 
-	if (!(funp = (void**)malloc(sizeof(void*) * 11)))
-		return (NULL);
 	funp[0] = push_a;
 	funp[1] = &push_b;
 	funp[2] = &rotate_a;
@@ -98,23 +95,18 @@ static void		check_sorted(t_double **a, t_double **b)
 
 void			exec_instruc(t_double **a, t_double **b)
 {
-	void		*funp;
+	void		(*funp[11])();
 	char		*instr;
 	int			ret;
 	int			i;
 
-	if (!(funp = funp_init()))
-	{
-		ft_printf("error\n");
-		return ;
-	}
+	funp_init(funp);
 	while ((ret = get_next_line(0, &instr)) && ret != -1 && i != -1)
 	{
 		i = instr_index(instr);
 		if (i != -1)
 			funp[i](a, b);
 	}
-	free(funp);
 	if (ret == -1 || i == -1)
 	{
 		ft_printf("error\n");

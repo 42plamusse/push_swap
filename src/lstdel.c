@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   lstdel.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/26 16:39:50 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/26 17:03:07 by plamusse         ###   ########.fr       */
+/*   Created: 2017/09/28 14:52:05 by plamusse          #+#    #+#             */
+/*   Updated: 2017/09/28 15:06:11 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	rotate_a(t_double **a, t_double **b)
-{
-	t_double	**tmp;
+#include "../includes/utils.h"
 
-	*a = (*a)->next;
-	tmp = b;
+void	double_lstdel(t_double **a)
+{
+	t_double	*tmp;
+
+	if (!*a)
+		return ;
+	tmp = (*a)->next;
+	while (tmp->next != *a)
+	{
+		tmp = tmp->next;
+		free(tmp->prev);
+	}
+	free(tmp);
+	a = NULL;
 }
 
-void	rotate_b(t_double **a, t_double **b)
-{
-	t_double	**tmp;
-
-	*b = (*b)->next;
-	tmp = a;
-}
-
-void	rotate_ab(t_double **a, t_double **b)
-{
-	*a = (*a)->next;
-	*b = (*b)->next;
-}
