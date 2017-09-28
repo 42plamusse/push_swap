@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   stocker_n.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/10 16:30:02 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/27 16:58:55 by plamusse         ###   ########.fr       */
+/*   Created: 2017/09/08 13:16:38 by plamusse          #+#    #+#             */
+/*   Updated: 2017/09/08 13:52:37 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "ft_printf.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "list.h"
-#endif
+int		stock_n(int *arg, t_size *sz)
+{
+	*arg = sz->op + sz->no;
+	return (1);
+}

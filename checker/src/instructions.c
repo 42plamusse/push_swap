@@ -6,30 +6,33 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 00:55:23 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/26 13:04:10 by plamusse         ###   ########.fr       */
+/*   Updated: 2017/09/27 17:38:33 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "../includes/checker.h"
 
 /*
 **	Use:	Stores the address of each instruction function into an void array.
 */
 
-static void		funp_init(void *funp)
+static void		*funp_init(void)
 {
-	funp[0] = &push_a;
-	funp[4] = &push_b;
+	void	**funp;
+
+	if (!(funp = (void**)malloc(sizeof(void*) * 11)))
+		return (NULL);
+	funp[0] = push_a;
+	funp[1] = &push_b;
 	funp[2] = &rotate_a;
 	funp[3] = &rev_rotate_a;
-	funp[6] = &rotate_b;
-	funp[7] = &rev_rotate_b;
-	funp[1] = &swap_a;
-	funp[1] = &swap_b;
+	funp[4] = &rotate_b;
+	funp[5] = &rev_rotate_b;
+	funp[6] = &swap_a;
+	funp[7] = &swap_b;
 	funp[8] = &rotate_ab;
 	funp[9] = &rev_rotate_ab;
 	funp[10] = &swap_ab;
-	funp[11] = NULL;
 }
 
 /*
@@ -70,15 +73,20 @@ static int		instr_index(char *instr)
 static void		check_sorted(t_double **a, t_double **b)
 {
 	int			i;
-	t_double	tmp;
+	t_double	*tmp;
+	int			end;
 
 	i = 0;
 	tmp = *a;
-	while (tmp && i == tmp->srtd && i < tmp->asize)
+	end = 0;
+	while (tmp && i == tmp->srtd && !end)
 	{
-
 		i++;
-	if (i == a->asize && !(*b))
+		tmp = tmp->next;
+		if (tmp == *a)
+			end = 1;
+	}
+	if (*a && tmp == *a && !(*b))
 		ft_printf("OK\n");
 	ft_printf("KO\n");
 }
@@ -90,18 +98,23 @@ static void		check_sorted(t_double **a, t_double **b)
 
 void			exec_instruc(t_double **a, t_double **b)
 {
-	void		funp[12];
+	void		*funp;
 	char		*instr;
 	int			ret;
 	int			i;
 
-	funp_init(funp);
+	if (!(funp = funp_init()))
+	{
+		ft_printf("error\n");
+		return ;
+	}
 	while ((ret = get_next_line(0, &instr)) && ret != -1 && i != -1)
 	{
 		i = instr_index(instr);
 		if (i != -1)
 			funp[i](a, b);
 	}
+	free(funp);
 	if (ret == -1 || i == -1)
 	{
 		ft_printf("error\n");

@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 08:35:25 by plamusse          #+#    #+#             */
-/*   Updated: 2017/06/13 15:21:54 by plamusse         ###   ########.fr       */
+/*   Updated: 2017/09/28 13:44:49 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
+
+typedef	struct		s_list
+{
+	void			*content;
+	size_t			content_size;
+	struct s_list	*next;
+}					t_list;
 
 size_t				ft_strlen(const char *s);
 
@@ -133,13 +140,6 @@ void				ft_putstr_fd(const char *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 
 void				ft_putnbr_fd(int n, int fd);
-
-typedef	struct		s_list
-{
-	void			*content;
-	size_t			content_size;
-	struct s_list	*next;
-}					t_list;
 
 t_list				*ft_lstnew(void const *content,
 						size_t content_size);

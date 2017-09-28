@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/10 16:30:02 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/27 16:58:55 by plamusse         ###   ########.fr       */
+/*   Created: 2017/05/02 16:02:13 by plamusse          #+#    #+#             */
+/*   Updated: 2017/09/28 13:42:27 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef GET_NEXT_LINE_H
 
-# include <stdio.h>
+# define GET_NEXT_LINE_H
+
 # include <stdlib.h>
 # include <unistd.h>
-# include "list.h"
+# include <string.h>
+# include <stdio.h>
+# include <fcntl.h>
+# define BUFF_SIZE 32
+# include "libft.h"
+
+int					get_next_line(int const fd, char **line);
+
 #endif

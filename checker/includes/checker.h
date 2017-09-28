@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 19:18:07 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/13 02:10:33 by plamusse         ###   ########.fr       */
+/*   Updated: 2017/09/27 16:41:24 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 **	HEADERS
 */
 
-# include "~/Current/push_swap/includes/list.h"
-# include "~/Current/push_swap/includes/utils.h"
+# include "../../includes/list.h"
+# include "../../includes/utils.h"
 
 /*
 **	STRUCTURES
@@ -43,7 +43,7 @@ struct					s_instr;
 typedef struct s_funp	t_funp;
 struct					s_funp
 {
-	char	*content;
+	char	content[4];
 	void	(*f)(t_double**, t_double**);
 };
 

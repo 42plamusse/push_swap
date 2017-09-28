@@ -6,7 +6,7 @@
 #    By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/17 14:39:22 by plamusse          #+#    #+#              #
-#    Updated: 2017/09/06 20:32:12 by plamusse         ###   ########.fr        #
+#    Updated: 2017/09/28 13:44:30 by plamusse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,25 @@ SRC = ft_abs.c \
 		ft_strsub.c \
 		ft_strtrim.c \
 		ft_tolower.c \
-		ft_toupper.c
+		ft_toupper.c \
+		ft_printf.c \
+		get_next_line.c \
+	  	parser.c \
+	  	parsing_tools.c \
+	  	converter.c \
+	  	conv_tools.c \
+	  	stocker_cs.c \
+	  	indent_tools.c \
+	  	indent_wchar.c \
+	  	itoa.c \
+	  	stocker_signed.c \
+	  	stocker_oux.c \
+	  	stocker_unsigned.c \
+	  	stocker_octal.c \
+	  	stocker_hexa.c \
+	  	stocker_pointer.c \
+	  	stocker_n.c \
+	  	stocker_wcs.c
 
 OBJ			= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 

@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 20:47:46 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/14 12:56:34 by plamusse         ###   ########.fr       */
+/*   Updated: 2017/09/27 16:58:57 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,15 @@ struct					s_double
 	t_double	*prev;
 };
 
+void	push_a(t_double **a, t_double **b);
+void	push_b(t_double **a, t_double **b);
+void	swap_a(t_double **a, t_double **b);
+void	swap_b(t_double **a, t_double **b);
+void	swap_ab(t_double **a, t_double **b);
+void	rotate_a(t_double **a, t_double **b);
+void	rotate_b(t_double **a, t_double **b);
+void	rotate_ab(t_double **a, t_double **b);
+void	rev_rotate_a(t_double **a, t_double **b);
+void	rev_rotate_b(t_double **a, t_double **b);
+void	rev_rotate_ab(t_double **a, t_double **b);
 #endif
