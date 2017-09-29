@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 19:24:13 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/28 18:06:17 by plamusse         ###   ########.fr       */
+/*   Updated: 2017/09/29 19:46:12 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,20 @@ static t_double	*create_node(char *elem, t_double **a, int pos)
 	new->cur = pos;
 	new->srtd = 0;
 	new->prio = 0;
-	if (*a)
+	printf("%p\n", *a);
+	if (!(*a))
+	{
+		*a = new;
+		new->prev = *a;
+		new->next = *a;
+	}
+	else
 	{
 		(*a)->prev->next = new;
 		new->prev = (*a)->prev;
 		new->next = *a;
 		(*a)->prev = new;
 	}
-	else
-	{
-		*a = new;
-		new->prev = *a;
-		new->next = *a;
-	}
-	while (1)
-		;
 	return (new);
 }
 
@@ -81,7 +80,7 @@ static int		stock_elem(char *elem, t_double **a, int pos)
 	if ((new = create_node(elem, a, pos)) == NULL)
 		return (-1);
 	tmp = *a;
-	i = 0;
+	i = 1;
 	while (i < pos)
 	{
 		if (new->elem == tmp->elem)
@@ -103,6 +102,7 @@ int				create_stack(int argc, char *argv[], t_double **a)
 	i = 1;
 	while (i < argc)
 	{
+	printf("i = %d\n", i);
 		if (stock_elem(argv[i], a, i) == -1)
 		{
 			if (*a)
