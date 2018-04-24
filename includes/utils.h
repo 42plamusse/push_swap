@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 16:30:02 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/29 16:06:00 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/04/24 21:21:17 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,41 +18,32 @@
 # include <unistd.h>
 # include "../libft/includes/ft_printf.h"
 # include "../libft/includes/get_next_line.h"
+
+/*
+**	DEFINES
+*/
+
+# define ERROR		-1
+# define SUCCESS	0
+
 /*
 **	STRUCTURES
 */
 
 /*
-**	Use:	Element of the double circular chained list used for the navigation
-** 			in stacks A and B.
-*/
-
-typedef struct s_double	t_double;
-struct					s_double
-{
-	int			elem;
-	int			cur;
-	int			srtd;
-	int			prio;
-	t_double	*next;
-	t_double	*prev;
-};
-
-/*
 **	FUNCTIONS
 */
 
-int				create_stack(int argc, char *argv[], t_double **a);
-void			push_a(t_double **a, t_double **b);
-void			push_b(t_double **a, t_double **b);
-void			swap_a(t_double **a, t_double **b);
-void			swap_b(t_double **a, t_double **b);
-void			swap_ab(t_double **a, t_double **b);
-void			rotate_a(t_double **a, t_double **b);
-void			rotate_b(t_double **a, t_double **b);
-void			rotate_ab(t_double **a, t_double **b);
-void			rev_rotate_a(t_double **a, t_double **b);
-void			rev_rotate_b(t_double **a, t_double **b);
-void			rev_rotate_ab(t_double **a, t_double **b);
-void			double_lstdel(t_double **a);
+int				create_stack(int argc, char *argv[], t_list *a);
+void			push_a(t_list **a, t_list **b);
+void			push_b(t_list **a, t_list **b);
+void			swap_a(t_list **a, t_list **b);
+void			swap_b(t_list **a, t_list **b);
+void			swap_ab(t_list **a, t_list **b);
+void			rotate_a(t_list **a, t_list **b);
+void			rotate_b(t_list **a, t_list **b);
+void			rotate_ab(t_list **a, t_list **b);
+void			rev_rotate_a(t_list **a, t_list **b);
+void			rev_rotate_b(t_list **a, t_list **b);
+void			rev_rotate_ab(t_list **a, t_list **b);
 #endif

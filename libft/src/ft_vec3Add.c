@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_vec3Add.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/26 19:09:05 by plamusse          #+#    #+#             */
-/*   Updated: 2018/04/24 20:43:34 by plamusse         ###   ########.fr       */
+/*   Created: 2018/03/09 15:14:39 by plamusse          #+#    #+#             */
+/*   Updated: 2018/03/09 15:15:29 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list		*ft_lstnew(void const *content, size_t content_size)
+t_vec				ft_vec3Add(t_vec v1, t_vec v2)
 {
-	t_list		*elem;
+	t_vec			add;
 
-	if (!(elem = (t_list*)malloc(sizeof(*elem))))
-		return (NULL);
-	elem->content = (content) ? ft_memcpy(malloc(sizeof(*content) *
-						content_size), content, content_size) : NULL;
-	elem->content_size = (elem->content) ? content_size : 0;
-	elem->next = NULL;
-	elem->prev = NULL;
-	return (elem);
+	add.x = v1.x + v2.x;
+	add.y = v1.y + v2.y;
+	add.z = v1.z + v2.z;
+	return (add);
 }

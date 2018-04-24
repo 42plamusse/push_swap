@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_vec3Normalize.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/26 19:09:05 by plamusse          #+#    #+#             */
-/*   Updated: 2018/04/24 20:43:34 by plamusse         ###   ########.fr       */
+/*   Created: 2018/03/09 15:12:47 by plamusse          #+#    #+#             */
+/*   Updated: 2018/03/11 18:58:00 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list		*ft_lstnew(void const *content, size_t content_size)
+t_vec			ft_vec3Normalize(t_vec v)
 {
-	t_list		*elem;
+	t_vec	tmp;
+	double	normal;
+	double	div;
 
-	if (!(elem = (t_list*)malloc(sizeof(*elem))))
-		return (NULL);
-	elem->content = (content) ? ft_memcpy(malloc(sizeof(*content) *
-						content_size), content, content_size) : NULL;
-	elem->content_size = (elem->content) ? content_size : 0;
-	elem->next = NULL;
-	elem->prev = NULL;
-	return (elem);
+	div = sqrt(ft_vec3Dot(v, v));
+	if (div != 0)
+		normal = 1 / div;
+	else
+		normal = 0;
+	tmp.x = v.x * normal;
+	tmp.y = v.y * normal;
+	tmp.z = v.z * normal;
+	return (tmp);
 }

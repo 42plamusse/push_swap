@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 08:35:25 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/28 13:44:49 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/04/24 21:17:42 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,27 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <math.h>
+# include "ft_printf.h"
 
 typedef	struct		s_list
 {
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
+	struct s_list	*prev;
 }					t_list;
 
+typedef struct		s_vec
+{
+	double			x;
+	double			y;
+	double			z;
+}					t_vec;
+
 size_t				ft_strlen(const char *s);
+
+int					ft_tablen(const char **tab);
 
 char				*ft_strdup(const char *s1);
 
@@ -47,11 +59,15 @@ size_t				ft_strlcat(char *dst, const char *src, size_t size);
 
 int					ft_atoi(const char *str);
 
+double				ft_atof(char *str);
+
 int					ft_isalpha(int c);
 
 int					ft_isalnum(int c);
 
 int					ft_isdigit(int c);
+
+int					ft_ishexa(int c);
 
 int					ft_isascii(int c);
 
@@ -95,6 +111,8 @@ void				ft_strdel(char **as);
 
 void				ft_strclr(char *s);
 
+void				ft_tabclr(char **tab);
+
 void				ft_striter(char *s, void (*f)(char *));
 
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
@@ -119,11 +137,17 @@ char				**ft_strsplit(char const *s, char c);
 
 char				*ft_itoa(int n);
 
-ssize_t				ft_abs(ssize_t n);
+int					ft_abs(int n);
+
+double				ft_fabs(double n);
 
 ssize_t				ft_intlen(ssize_t n);
 
 char				*ft_strrev(const char *s);
+
+void				ft_perror(char *str);
+
+int					ft_printf(const char *format, ...);
 
 void				ft_putchar(char c);
 
@@ -141,20 +165,32 @@ void				ft_putendl_fd(char const *s, int fd);
 
 void				ft_putnbr_fd(int n, int fd);
 
+/*
+**	List
+*/
+
+int					ft_lstlen(t_list *lst);
 t_list				*ft_lstnew(void const *content,
 						size_t content_size);
-
 void				ft_lstdelone(t_list **alst,
 						void (*del)(void *, size_t));
-
 void				ft_lstdel(t_list **alst,
 						void (*del)(void *, size_t));
-
-void				ft_lstadd(t_list **alst, t_list *new);
-
+void				ft_lst_memclr(void *content, size_t content_size);
+t_list				*ft_lst_push_front(t_list **alst, t_list *new);
+t_list				*ft_lst_push_back(t_list **alst, t_list *new);
+t_list				*ft_lst2c_push_back(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst,
 						void (*f)(t_list *elem));
-
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+/*
+**	Vector
+*/
+
+t_vec				ft_vec3Sub(t_vec v1, t_vec v2);
+double				ft_vec3Dot(t_vec v1, t_vec v2);
+t_vec				ft_vec3Normalize(t_vec v);
+t_vec				ft_vec3Scale(t_vec v, double scale);
+t_vec				ft_vec3Add(t_vec v1, t_vec v2);
 
 #endif

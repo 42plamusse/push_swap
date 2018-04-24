@@ -6,12 +6,12 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 19:24:13 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/29 19:46:12 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/04/24 21:21:19 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/utils.h"
-
+#include "checker.h"
+/*
 static int		parse(char *elem)
 {
 	long long	tmp;
@@ -68,6 +68,7 @@ static t_double	*create_node(char *elem, t_double **a, int pos)
 	}
 	return (new);
 }
+*/
 
 static int		stock_elem(char *elem, t_double **a, int pos)
 {
@@ -95,21 +96,18 @@ static int		stock_elem(char *elem, t_double **a, int pos)
 	return (1);
 }
 
-int				create_stack(int argc, char *argv[], t_double **a)
+int				create_stack(int argc, char *argv[], t_lstdbl *a)
 {
 	int			i;
 
+	(void)argv;
+	(void)a;
 	i = 1;
 	while (i < argc)
 	{
-	printf("i = %d\n", i);
-		if (stock_elem(argv[i], a, i) == -1)
-		{
-			if (*a)
-				double_lstdel(a);
-			return (-1);
-		}
+		if (stock_elem(argv[i], a, i) == ERROR)
+			ft_perror("create stack");
 		i++;
 	}
-	return (1);
+	return (SUCCESS);
 }

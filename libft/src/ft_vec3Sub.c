@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_vec3Sub.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/26 19:09:05 by plamusse          #+#    #+#             */
-/*   Updated: 2018/04/24 20:43:34 by plamusse         ###   ########.fr       */
+/*   Created: 2018/03/09 15:05:15 by plamusse          #+#    #+#             */
+/*   Updated: 2018/03/09 15:19:46 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list		*ft_lstnew(void const *content, size_t content_size)
+t_vec			ft_vec3Sub(t_vec v1, t_vec v2)
 {
-	t_list		*elem;
+	t_vec	sub;
 
-	if (!(elem = (t_list*)malloc(sizeof(*elem))))
-		return (NULL);
-	elem->content = (content) ? ft_memcpy(malloc(sizeof(*content) *
-						content_size), content, content_size) : NULL;
-	elem->content_size = (elem->content) ? content_size : 0;
-	elem->next = NULL;
-	elem->prev = NULL;
-	return (elem);
+	sub.x = v1.x - v2.x;
+	sub.y = v1.y - v2.y;
+	sub.z = v1.z - v2.z;
+	return (sub);
 }

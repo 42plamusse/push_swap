@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_tablen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/26 19:09:05 by plamusse          #+#    #+#             */
-/*   Updated: 2018/04/24 20:43:34 by plamusse         ###   ########.fr       */
+/*   Created: 2018/02/26 19:27:54 by plamusse          #+#    #+#             */
+/*   Updated: 2018/02/26 19:31:35 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list		*ft_lstnew(void const *content, size_t content_size)
+int			ft_tablen(const char **tab)
 {
-	t_list		*elem;
+	int		i;
 
-	if (!(elem = (t_list*)malloc(sizeof(*elem))))
-		return (NULL);
-	elem->content = (content) ? ft_memcpy(malloc(sizeof(*content) *
-						content_size), content, content_size) : NULL;
-	elem->content_size = (elem->content) ? content_size : 0;
-	elem->next = NULL;
-	elem->prev = NULL;
-	return (elem);
+	if (!tab)
+		return (0);
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }

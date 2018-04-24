@@ -6,13 +6,13 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 15:44:24 by plamusse          #+#    #+#             */
-/*   Updated: 2017/06/13 13:52:09 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/01/29 15:57:03 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-ssize_t		ft_abs(ssize_t n)
+int		ft_abs(int n)
 {
 	return ((n < 0) ? -n : n);
 }

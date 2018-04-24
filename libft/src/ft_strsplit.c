@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 22:14:03 by plamusse          #+#    #+#             */
-/*   Updated: 2017/04/28 14:43:25 by plamusse         ###   ########.fr       */
+/*   Updated: 2017/12/19 15:26:53 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,15 @@ static size_t	ft_count_words(char const *s, char c)
 	return (j);
 }
 
+void			dbl_adel(char **todel)
+{
+	int		i;
+
+	i = 0;
+	while (todel[i])
+		free(todel[i++]);
+}
+
 char			**ft_strsplit(char const *s, char c)
 {
 	char	**tab;
@@ -66,7 +75,11 @@ char			**ft_strsplit(char const *s, char c)
 		while (i < nwords)
 		{
 			s = ft_nextword(s, c);
-			tab[i] = ft_strsub(s, 0, ft_wordlen(s, c));
+			if (!(tab[i] = ft_strsub(s, 0, ft_wordlen(s, c))))
+			{
+				dbl_adel(tab);
+				return (NULL);
+			}
 			i++;
 			s = s + ft_wordlen(s, c);
 		}

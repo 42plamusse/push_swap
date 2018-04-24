@@ -6,7 +6,7 @@
 #    By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/17 14:39:22 by plamusse          #+#    #+#              #
-#    Updated: 2017/09/28 13:44:30 by plamusse         ###   ########.fr        #
+#    Updated: 2018/04/24 21:18:13 by plamusse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,21 +22,28 @@ LIB_DIR		= ./lib
 
 SRC = ft_abs.c \
 		ft_atoi.c \
+		ft_atof.c \
 		ft_bzero.c \
+		ft_fabs.c \
 		ft_intlen.c \
 		ft_isalnum.c \
 		ft_isalpha.c \
 		ft_isascii.c \
-		ft_isprint.c \
+		ft_ishexa.c \
 		ft_isdigit.c \
+		ft_isprint.c \
 		ft_isspace.c \
 		ft_itoa.c \
-		ft_lstadd.c \
 		ft_lstdel.c \
 		ft_lstdelone.c \
 		ft_lstiter.c \
+		ft_lstlen.c \
 		ft_lstmap.c \
+		ft_lst_memclr.c \
 		ft_lstnew.c \
+		ft_lst_push_back.c \
+		ft_lst2c_push_back.c \
+		ft_lst_push_front.c \
 		ft_memalloc.c \
 		ft_memccpy.c \
 		ft_memchr.c \
@@ -45,6 +52,7 @@ SRC = ft_abs.c \
 		ft_memdel.c \
 		ft_memmove.c \
 		ft_memset.c \
+		ft_perror.c \
 		ft_putchar.c \
 		ft_putchar_fd.c \
 		ft_putendl.c \
@@ -80,9 +88,16 @@ SRC = ft_abs.c \
 		ft_strstr.c \
 		ft_strsub.c \
 		ft_strtrim.c \
+		ft_tabclr.c \
+		ft_tablen.c \
 		ft_tolower.c \
 		ft_toupper.c \
 		ft_printf.c \
+		ft_vec3Add.c \
+		ft_vec3Dot.c \
+		ft_vec3Normalize.c \
+		ft_vec3Scale.c \
+		ft_vec3Sub.c \
 		get_next_line.c \
 	  	parser.c \
 	  	parsing_tools.c \

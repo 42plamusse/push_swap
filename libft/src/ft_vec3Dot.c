@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   ft_vec3Dot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/27 11:49:30 by plamusse          #+#    #+#             */
-/*   Updated: 2017/05/23 20:39:07 by fwutschk         ###   ########.fr       */
+/*   Created: 2018/03/09 15:11:51 by plamusse          #+#    #+#             */
+/*   Updated: 2018/03/09 15:12:21 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd(t_list **alst, t_list *new)
+double		ft_vec3Dot(t_vec v1, t_vec v2)
 {
-	t_list	*elem;
-
-	elem = *alst;
-	new->next = elem;
-	*alst = new;
+	return ((v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z));
 }
