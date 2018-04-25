@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_perror.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/31 17:03:50 by plamusse          #+#    #+#             */
-/*   Updated: 2018/04/25 19:04:01 by plamusse         ###   ########.fr       */
+/*   Created: 2018/04/25 19:28:10 by plamusse          #+#    #+#             */
+/*   Updated: 2018/04/25 19:28:42 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "utils.h"
 
-void			ft_perror(char *str)
+void	ft_lst2c_print(t_list *lst)
 {
-	ft_printf("%s\n", str);
+	t_list		*tmp;
+	t_elem		*elem;
+	int			len;
+
+	len = ft_lst2c_len(lst);
+	tmp = lst;
+	while (len--)
+	{
+		elem = (t_elem*)tmp->content;
+		ft_printf("%d", elem->nbr);
+		if (len)
+			ft_printf("-");
+		else
+			ft_printf("\n");
+		tmp = tmp->next;
+	}
 }

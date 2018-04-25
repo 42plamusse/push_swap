@@ -6,13 +6,13 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 19:24:13 by plamusse          #+#    #+#             */
-/*   Updated: 2018/04/24 21:21:19 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/04/25 19:28:55 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
-/*
-static int		parse(char *elem)
+#include "utils.h"
+
+static int		parse_int(char *elem)
 {
 	long long	tmp;
 	int			i;
@@ -31,82 +31,67 @@ static int		parse(char *elem)
 	if (elem[i] || (tmp > 2147483647 && sign > 0) ||
 					(tmp > 2147483648 && sign < 0))
 	{
-		ft_printf("elem\n");
-		//print_err("elem", flags);
-		return (-1);
+		ft_perror("too big elem");
+		return (ERROR);
 	}
-	return (1);
+	return (SUCCESS);
 }
 
-static t_double	*create_node(char *elem, t_double **a, int pos)
+static void		init_elem(t_elem *elem, char *nbr, int pos)
 {
-	t_double	*new;
+	elem->nbr = ft_atoi(nbr);
+	elem->pos = pos;
+	elem->srtd = 0;
+	elem->prio = 0;
+}
 
-	if (!(new = (t_double*)malloc(sizeof(t_double))))
-	{
-		ft_printf("malloc\n");
-		//print_err("malloc", flags);
-		return (NULL);
-	}
-	new->elem = ft_atoi(elem);
-	new->cur = pos;
-	new->srtd = 0;
-	new->prio = 0;
-	printf("%p\n", *a);
-	if (!(*a))
-	{
-		*a = new;
-		new->prev = *a;
-		new->next = *a;
-	}
-	else
-	{
-		(*a)->prev->next = new;
-		new->prev = (*a)->prev;
-		new->next = *a;
-		(*a)->prev = new;
-	}
+static t_list	*create_node(char *nbr, t_list **a, int pos)
+{
+	t_elem		elem;
+	t_list		*new;
+
+	init_elem(&elem, nbr, pos);
+	new = ft_lst2c_push_back(a , ft_lstnew(&elem, sizeof(elem)));
 	return (new);
 }
-*/
 
-static int		stock_elem(char *elem, t_double **a, int pos)
+static int		stock_elem(char *elem, t_list **a, int pos)
 {
-	t_double	*tmp;
-	t_double	*new;
+	t_list	*tmp;
+	t_list	*new;
 	int			i;
 
-	if (parse(elem) == -1)
-		return (-1);
-	if ((new = create_node(elem, a, pos)) == NULL)
-		return (-1);
+	if (parse_int(elem) == ERROR)
+		return (ERROR);
+	if ((new = create_node(elem, a, pos)) == MALLOC_ERROR)
+		return (ERROR);
 	tmp = *a;
 	i = 1;
 	while (i < pos)
 	{
-		if (new->elem == tmp->elem)
+		if (((t_elem*)(new->content))->nbr == ((t_elem*)(tmp->content))->nbr)
 		{
-			ft_printf("duplicate\n");
-			//print_err("duplicate", flags);
-			return (-1);
+			ft_perror("duplicate");
+			return (ERROR);
 		}
 		i++;
 		tmp = tmp->next;
 	}
-	return (1);
+	return (SUCCESS);
 }
 
-int				create_stack(int argc, char *argv[], t_lstdbl *a)
+int				create_stack(int argc, char *argv[], t_list **a)
 {
 	int			i;
 
-	(void)argv;
-	(void)a;
 	i = 1;
 	while (i < argc)
 	{
 		if (stock_elem(argv[i], a, i) == ERROR)
+		{
 			ft_perror("create stack");
+			return (ERROR);
+		}
 		i++;
 	}
 	return (SUCCESS);

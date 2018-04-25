@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 21:05:30 by plamusse          #+#    #+#             */
-/*   Updated: 2018/04/24 21:16:16 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/04/25 17:12:39 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,17 @@ t_list	*ft_lst2c_push_back(t_list **alst, t_list *new)
 		return (NULL);
 	if (!*alst)
 	{
+		new->prev = new;
+		new->next = new;
 		*alst = new;
 		return (new);
 	}
 	tmp = *alst;
-	new->prev = tmp;
-	new->next = tmp->next;
-	tmp->next = new;
-	*alst = new;
+	new->next = tmp;
+	new->prev = tmp->prev;
+	tmp->prev->next = new;
+	tmp->prev = new;
+	if (tmp->next == tmp)
+		tmp->next = new;
 	return (new);
 }

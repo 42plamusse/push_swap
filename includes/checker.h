@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 19:18:07 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/28 14:50:38 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/04/25 19:26:47 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@
 **	FUNCTIONS
 */
 
-void			exec_instruc(t_double **a, t_double **b);
+void			exec_instruc(t_list *a, t_list *b);
 
 #endif

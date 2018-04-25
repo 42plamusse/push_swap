@@ -6,30 +6,31 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 16:00:43 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/28 15:44:29 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/04/25 20:23:55 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/utils.h"
 
-void	swap_a(t_double **a, t_double **b)
+void	swap_a(t_list **a, t_list **b)
 {
-	t_double	*tmp;
+	t_list	*tmp;
 
+	(void)b;
+	printf("in\n");
 	(*a)->next->prev = (*a)->prev;
+	printf("out\n");
 	(*a)->prev->next = (*a)->next;
 	tmp = (*a)->next;
 	(*a)->prev = (*a)->next;
 	(*a)->next = tmp->next;
 	tmp->next = *a;
 	*a = tmp;
-	tmp = *b;
-	tmp = 0;
 }
 	
-void	swap_b(t_double **a, t_double **b)
+void	swap_b(t_list **a, t_list **b)
 {
-	t_double	*tmp;
+	t_list	*tmp;
 
 	(*b)->next->prev = (*b)->prev;
 	(*b)->prev->next = (*b)->next;
@@ -42,7 +43,7 @@ void	swap_b(t_double **a, t_double **b)
 	tmp = 0;
 }
 
-void	swap_ab(t_double **a, t_double **b)
+void	swap_ab(t_list **a, t_list **b)
 {
 	swap_a(a, b);
 	swap_b(a, b);

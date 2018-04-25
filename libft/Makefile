@@ -6,7 +6,7 @@
 #    By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/17 14:39:22 by plamusse          #+#    #+#              #
-#    Updated: 2018/04/24 21:18:13 by plamusse         ###   ########.fr        #
+#    Updated: 2018/04/25 19:25:34 by plamusse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRC = ft_abs.c \
 		ft_isprint.c \
 		ft_isspace.c \
 		ft_itoa.c \
-		ft_lstdel.c \
+		ft_lst_del.c \
 		ft_lstdelone.c \
 		ft_lstiter.c \
 		ft_lstlen.c \
@@ -42,8 +42,10 @@ SRC = ft_abs.c \
 		ft_lst_memclr.c \
 		ft_lstnew.c \
 		ft_lst_push_back.c \
-		ft_lst2c_push_back.c \
 		ft_lst_push_front.c \
+		ft_lst2c_del.c \
+		ft_lst2c_len.c \
+		ft_lst2c_push_back.c \
 		ft_memalloc.c \
 		ft_memccpy.c \
 		ft_memchr.c \

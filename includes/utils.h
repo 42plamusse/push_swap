@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 16:30:02 by plamusse          #+#    #+#             */
-/*   Updated: 2018/04/24 21:21:17 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/04/25 19:27:58 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,32 @@
 **	DEFINES
 */
 
-# define ERROR		-1
-# define SUCCESS	0
+# define ERROR			-1
+# define SUCCESS		0
+# define MALLOC_ERROR	NULL
 
 /*
 **	STRUCTURES
 */
 
+typedef struct	s_elem
+{
+	int		nbr;
+	int		pos;
+	int		srtd;
+	int		prio;
+}				t_elem;
+
 /*
 **	FUNCTIONS
 */
 
-int				create_stack(int argc, char *argv[], t_list *a);
+/*
+**	Utils
+*/
+void			ft_lst2c_print(t_list *lst);
+
+int				create_stack(int argc, char *argv[], t_list **a);
 void			push_a(t_list **a, t_list **b);
 void			push_b(t_list **a, t_list **b);
 void			swap_a(t_list **a, t_list **b);

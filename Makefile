@@ -6,7 +6,7 @@
 #    By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/17 14:39:22 by plamusse          #+#    #+#              #
-#    Updated: 2018/04/24 20:13:03 by plamusse         ###   ########.fr        #
+#    Updated: 2018/04/25 20:18:24 by plamusse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,13 @@ LIB_DIR		= ./libft
 # src / obj files
 
 SRC			= checker.c \
-			  instructions.c \
 			  create_stack.c \
+			  utils.c \
+			  instructions.c \
 			  push.c \
 			  swap.c \
 			  rotate.c \
-			  rev_rotate.c \
-			  lstdel.c
+			  rev_rotate.c
 
 OBJ			= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 

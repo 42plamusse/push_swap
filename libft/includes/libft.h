@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 08:35:25 by plamusse          #+#    #+#             */
-/*   Updated: 2018/04/24 21:17:42 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/04/25 19:25:31 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,15 +174,25 @@ t_list				*ft_lstnew(void const *content,
 						size_t content_size);
 void				ft_lstdelone(t_list **alst,
 						void (*del)(void *, size_t));
-void				ft_lstdel(t_list **alst,
+void				ft_lst_del(t_list **alst,
 						void (*del)(void *, size_t));
 void				ft_lst_memclr(void *content, size_t content_size);
 t_list				*ft_lst_push_front(t_list **alst, t_list *new);
 t_list				*ft_lst_push_back(t_list **alst, t_list *new);
-t_list				*ft_lst2c_push_back(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst,
 						void (*f)(t_list *elem));
+
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+
+/*
+**	Listes doublement circulaires
+*/
+
+void				ft_lst2c_del(t_list **alst,
+						void (*del)(void *, size_t));
+int					ft_lst2c_len(t_list *lst);
+t_list				*ft_lst2c_push_back(t_list **alst, t_list *new);
+
 /*
 **	Vector
 */

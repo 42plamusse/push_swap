@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 00:55:23 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/28 15:39:19 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/04/25 20:20:38 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,32 +60,32 @@ static int		instr_index(char *instr)
 		return (9);
 	else if (!ft_strcmp(instr, "ss"))
 		return (10);
-	return (-1);
+	return (ERROR);
 }
 
 /*
 **	Use:	Checks if stack A is sorted.
 */
 
-static void		check_sorted(t_double **a, t_double **b)
+static void		check_sorted(t_list *a, t_list *b)
 {
-	int			i;
-	t_double	*tmp;
-	int			end;
+	t_list		*tmp;
+	int			len;
+	int			err;
 
-	i = 0;
-	tmp = *a;
-	end = 0;
-	while (tmp && i == tmp->srtd && !end)
+	len = ft_lst2c_len(a) - 1;
+	tmp = a;
+	err = 0;
+	while (err != ERROR && len--)
 	{
-		i++;
+		if (((t_elem*)(tmp->content))->nbr > ((t_elem*)(tmp->next->content))->nbr)
+			err = ERROR;
 		tmp = tmp->next;
-		if (tmp == *a)
-			end = 1;
 	}
-	if (*a && tmp == *a && !(*b))
+	if (a && err != ERROR && !ft_lst2c_len(b))
 		ft_printf("OK\n");
-	ft_printf("KO\n");
+	else
+		ft_printf("KO\n");
 }
 
 /*
@@ -93,7 +93,7 @@ static void		check_sorted(t_double **a, t_double **b)
 **			on both stacks and checks if correctly sorted.
 */
 
-void			exec_instruc(t_double **a, t_double **b)
+void			exec_instruc(t_list *a, t_list *b)
 {
 	void		(*funp[11])();
 	char		*instr;
@@ -101,16 +101,18 @@ void			exec_instruc(t_double **a, t_double **b)
 	int			i;
 
 	funp_init(funp);
-	while ((ret = get_next_line(0, &instr)) && ret != -1 && i != -1)
+	i = 0;
+	while ((ret = get_next_line(0, &instr)) > 0 && i != ERROR)
 	{
-		i = instr_index(instr);
-		if (i != -1)
+		printf("%s\n", instr);
+		if ((i = instr_index(instr)) != ERROR)
 			funp[i](a, b);
 	}
-	if (ret == -1 || i == -1)
+	if (ret == ERROR || i == ERROR)
 	{
 		ft_printf("error\n");
 		return ;
 	}
 	check_sorted(a, b);
+	printf("%s\n", instr);
 }

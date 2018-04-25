@@ -6,15 +6,15 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 12:19:19 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/28 15:45:29 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/04/25 20:17:32 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/utils.h"
 
-void	push_a(t_double **a, t_double **b)
+void	push_a(t_list **a, t_list **b)
 {
-	t_double	*tmp;
+	t_list	*tmp;
 
 	(*b)->prev->next = (*b)->next;	
 	(*b)->next->prev = (*b)->prev;
@@ -27,9 +27,9 @@ void	push_a(t_double **a, t_double **b)
 	*a = tmp;
 }
 
-void	push_b(t_double **a, t_double **b)
+void	push_b(t_list **a, t_list **b)
 {
-	t_double	*tmp;
+	t_list	*tmp;
 
 	(*a)->prev->next = (*a)->next;	
 	(*a)->next->prev = (*a)->prev;
