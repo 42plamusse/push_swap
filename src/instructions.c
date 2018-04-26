@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 00:55:23 by plamusse          #+#    #+#             */
-/*   Updated: 2018/04/25 20:20:38 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/04/26 18:30:13 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ static void		check_sorted(t_list *a, t_list *b)
 	int			len;
 	int			err;
 
+	if (!a)
+	{
+		ft_printf("KO\n");
+		return ;
+	}
 	len = ft_lst2c_len(a) - 1;
 	tmp = a;
 	err = 0;
@@ -93,7 +98,7 @@ static void		check_sorted(t_list *a, t_list *b)
 **			on both stacks and checks if correctly sorted.
 */
 
-void			exec_instruc(t_list *a, t_list *b)
+void			exec_instruc(t_list **a, t_list **b)
 {
 	void		(*funp[11])();
 	char		*instr;
@@ -107,12 +112,15 @@ void			exec_instruc(t_list *a, t_list *b)
 		printf("%s\n", instr);
 		if ((i = instr_index(instr)) != ERROR)
 			funp[i](a, b);
+	ft_lst2c_print(*a);
+	ft_lst2c_print_rev(*a);
+	ft_lst2c_print(*b);
+	ft_lst2c_print_rev(*b);
 	}
 	if (ret == ERROR || i == ERROR)
 	{
 		ft_printf("error\n");
 		return ;
 	}
-	check_sorted(a, b);
-	printf("%s\n", instr);
+	check_sorted(*a, *b);
 }

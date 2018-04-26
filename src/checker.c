@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:05:38 by plamusse          #+#    #+#             */
-/*   Updated: 2018/04/25 19:45:44 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/04/26 17:00:17 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int		main(int argc, char *argv[])
 	if (create_stack(argc, argv, &a) == SUCCESS)
 	{
 		ft_lst2c_print(a);
-		exec_instruc(a, b);
+		ft_lst2c_print_rev(a);
+		exec_instruc(&a, &b);
 	}
 	if (a)
 		ft_lst2c_del(&a, &ft_lst_memclr);

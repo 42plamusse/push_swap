@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 16:30:02 by plamusse          #+#    #+#             */
-/*   Updated: 2018/04/25 19:27:58 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/04/26 17:53:54 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct	s_elem
 **	Utils
 */
 void			ft_lst2c_print(t_list *lst);
+void			ft_lst2c_print_rev(t_list *lst);
 
 int				create_stack(int argc, char *argv[], t_list **a);
 void			push_a(t_list **a, t_list **b);

@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 16:00:43 by plamusse          #+#    #+#             */
-/*   Updated: 2018/04/25 20:23:55 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/04/26 17:38:13 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,36 @@
 
 void	swap_a(t_list **a, t_list **b)
 {
-	t_list	*tmp;
+	t_list	*first;
+	t_list	*second;
 
 	(void)b;
-	printf("in\n");
-	(*a)->next->prev = (*a)->prev;
-	printf("out\n");
-	(*a)->prev->next = (*a)->next;
-	tmp = (*a)->next;
-	(*a)->prev = (*a)->next;
-	(*a)->next = tmp->next;
-	tmp->next = *a;
-	*a = tmp;
+	first = *a;
+	second = first->next;
+	first->prev->next = second;
+	second->prev = first->prev;
+	second->next->prev = first;
+	first->next = second->next;
+	first->prev = second;
+	second->next = first;
+	*a = second;
 }
-	
+
 void	swap_b(t_list **a, t_list **b)
 {
-	t_list	*tmp;
+	t_list	*first;
+	t_list	*second;
 
-	(*b)->next->prev = (*b)->prev;
-	(*b)->prev->next = (*b)->next;
-	tmp = (*b)->next;
-	(*b)->prev = (*b)->next;
-	(*b)->next = tmp->next;
-	tmp->next = *b;
-	*b = tmp;
-	tmp = *a;
-	tmp = 0;
+	(void)a;
+	first = *b;
+	second = first->next;
+	first->prev->next = second;
+	second->prev = first->prev;
+	second->next->prev = first;
+	first->next = second->next;
+	first->prev = second;
+	second->next = first;
+	*b = second;
 }
 
 void	swap_ab(t_list **a, t_list **b)
