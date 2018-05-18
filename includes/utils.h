@@ -48,6 +48,7 @@ typedef struct	s_elem
 */
 void			ft_lst2c_print(t_list *lst);
 void			ft_lst2c_print_rev(t_list *lst);
+int			check_sorted(t_list *a);
 
 int				create_stack(int argc, char *argv[], t_list **a);
 void			push_a(t_list **a, t_list **b);

@@ -31,7 +31,7 @@ int		parser(va_list valist, const char *format, t_size *sz)
 	}
 	while (format[i] && (p = ft_strchr("hljz", format[i])) && ++i)
 		cflag(p, &fwp, format + i);
-	if (format[i] && converter(valist, sz, format[i], &fwp) && ++i)
-		;
+	if (format[i] && converter(valist, sz, format[i], &fwp))
+		++i;
 	return (i);
 }

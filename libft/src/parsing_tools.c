@@ -42,8 +42,8 @@ void		cflag(char *p, t_fwp *fwp, const char *next)
 		return ;
 	else if (*p == 'l' && (fwp->fc |= fl_l))
 	{
-		if (*next == 'l' && (fwp->fc |= fl_ll))
-			;
+		if (*next == 'l')
+			fwp->fc |= fl_ll;
 		return ;
 	}
 	else if (*p == 'j' && (fwp->fc |= fl_j))

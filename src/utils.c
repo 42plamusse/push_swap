@@ -42,7 +42,7 @@ void	ft_lst2c_print(t_list *lst)
 
 	if (!lst)
 		return ;
-	len = ft_lst2c_len(lst) + 1;
+	len = ft_lst2c_len(lst);
 	tmp = lst;
 	while (len--)
 	{
@@ -51,7 +51,28 @@ void	ft_lst2c_print(t_list *lst)
 		if (len)
 			ft_printf("-");
 		else
+
 			ft_printf("\n");
 		tmp = tmp->next;
 	}
+}
+
+int		check_sorted(t_list *a)
+{
+	t_list		*tmp;
+	int			len;
+	int			ret;
+
+	if (!a)
+		return(ERROR);
+	len = ft_lst2c_len(a) - 1;
+	tmp = a;
+	ret = SUCCESS;
+	while (ret != ERROR && len--)
+	{
+		if (((t_elem*)(tmp->content))->nbr > ((t_elem*)(tmp->next->content))->nbr)
+			ret = ERROR;
+		tmp = tmp->next;
+	}
+	return (ret);
 }

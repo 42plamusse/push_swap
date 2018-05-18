@@ -24,9 +24,6 @@ static size_t	ft_wordlen(char const *s, char c)
 
 static char		*ft_nextword(char const *s, char c)
 {
-	size_t	i;
-
-	i = 0;
 	while (*s && *s == c)
 		s++;
 	return ((char*)s);

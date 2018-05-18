@@ -1,8 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   instructions.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
+	/* ************************************************************************** */
+	/*                                                                            */
+	/*                                                        :::      ::::::::   */
+	/*   instructions.c                                     :+:      :+:    :+:   */
+	/*                                                    +:+ +:+         +:+     */
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/13 00:55:23 by plamusse          #+#    #+#             */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/checker.h"
+#include "checker.h"
 
 /*
 **	Use:	Stores the address of each instruction function into an void array.
@@ -63,35 +63,6 @@ static int		instr_index(char *instr)
 	return (ERROR);
 }
 
-/*
-**	Use:	Checks if stack A is sorted.
-*/
-
-static void		check_sorted(t_list *a, t_list *b)
-{
-	t_list		*tmp;
-	int			len;
-	int			err;
-
-	if (!a)
-	{
-		ft_printf("KO\n");
-		return ;
-	}
-	len = ft_lst2c_len(a) - 1;
-	tmp = a;
-	err = 0;
-	while (err != ERROR && len--)
-	{
-		if (((t_elem*)(tmp->content))->nbr > ((t_elem*)(tmp->next->content))->nbr)
-			err = ERROR;
-		tmp = tmp->next;
-	}
-	if (a && err != ERROR && !ft_lst2c_len(b))
-		ft_printf("OK\n");
-	else
-		ft_printf("KO\n");
-}
 
 /*
 **	Use:	Applies all instructions collected from standard input
@@ -113,14 +84,15 @@ void			exec_instruc(t_list **a, t_list **b)
 		if ((i = instr_index(instr)) != ERROR)
 			funp[i](a, b);
 	ft_lst2c_print(*a);
-	ft_lst2c_print_rev(*a);
 	ft_lst2c_print(*b);
-	ft_lst2c_print_rev(*b);
 	}
 	if (ret == ERROR || i == ERROR)
 	{
 		ft_printf("error\n");
 		return ;
 	}
-	check_sorted(*a, *b);
+	if (!*b && check_sorted(*a) == SUCCESS)
+		ft_printf("OK\n");
+	else
+		ft_printf("KO\n");
 }

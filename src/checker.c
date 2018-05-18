@@ -22,10 +22,9 @@ int		main(int argc, char *argv[])
 	if (create_stack(argc, argv, &a) == SUCCESS)
 	{
 		ft_lst2c_print(a);
-		ft_lst2c_print_rev(a);
 		exec_instruc(&a, &b);
 	}
-	if (a)
-		ft_lst2c_del(&a, &ft_lst_memclr);
+	ft_lst2c_del(&a, &ft_lst_memclr);
+	ft_lst2c_del(&b, &ft_lst_memclr);
 	return (0);
 }

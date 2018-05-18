@@ -28,7 +28,9 @@ SRC			= create_stack.c \
 			  push.c \
 			  swap.c \
 			  rotate.c \
-			  rev_rotate.c
+			  rev_rotate.c \
+			  commit_instruction.c
+				
 
 OBJ			= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
