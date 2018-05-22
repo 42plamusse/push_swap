@@ -13,53 +13,33 @@
 #include "checker.h"
 
 /*
-**	Use:	Stores the address of each instruction function into an void array.
-*/
-
-static void		funp_init(void (**funp)())
-{
-
-	funp[0] = push_a;
-	funp[1] = &push_b;
-	funp[2] = &rotate_a;
-	funp[3] = &rev_rotate_a;
-	funp[4] = &rotate_b;
-	funp[5] = &rev_rotate_b;
-	funp[6] = &swap_a;
-	funp[7] = &swap_b;
-	funp[8] = &rotate_ab;
-	funp[9] = &rev_rotate_ab;
-	funp[10] = &swap_ab;
-}
-
-/*
 **	Use:	Returns the index corresponding to the instruction in funp array.
 */
 
 static int		instr_index(char *instr)
 {
 	if (!ft_strcmp(instr, "pa"))
-		return (0);
+		return (PA);
 	else if (!ft_strcmp(instr, "pb"))
-		return (1);
+		return (PB);
 	else if (!ft_strcmp(instr, "ra"))
-		return (2);
+		return (RA);
 	else if (!ft_strcmp(instr, "rra"))
-		return (3);
+		return (RRA);
 	else if (!ft_strcmp(instr, "rb"))
-		return (4);
+		return (RB);
 	else if (!ft_strcmp(instr, "rrb"))
-		return (5);
+		return (RRB);
 	else if (!ft_strcmp(instr, "sa"))
-		return (6);
+		return (SA);
 	else if (!ft_strcmp(instr, "sb"))
-		return (7);
+		return (SB);
 	else if (!ft_strcmp(instr, "rr"))
-		return (8);
+		return (RR);
 	else if (!ft_strcmp(instr, "rrr"))
-		return (9);
+		return (RRR);
 	else if (!ft_strcmp(instr, "ss"))
-		return (10);
+		return (SS);
 	return (ERROR);
 }
 

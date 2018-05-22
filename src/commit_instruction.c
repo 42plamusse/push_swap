@@ -1,59 +1,100 @@
 #include "push_swap.h"
 
-int	commit_instruction(t_list **a, t_list **b)
+int	check_a(t_list *tmp)
 {
-	t_list	*tmp;
 	t_elem	*elem;
 	t_elem	*elem_next;
 	t_elem	*elem_prev;
 
+
+	if (!tmp)
+		return (ERROR);
+	elem = (t_elem*)(tmp->content);
+	elem_next = (t_elem*)(tmp->next->content);
+	elem_prev = (t_elem*)(tmp->prev->content);
+	if (elem->nbr > elem_next->nbr)
+		return (SA);
+	else if (elem->nbr > elem_prev->nbr)
+		return (RRA);
+	else
+		return (ERROR);
+}
+
+int	check_b(t_list *tmp)
+{
+	t_elem	*elem;
+	t_elem	*elem_next;
+	t_elem	*elem_prev;
+
+
+	if (!tmp)
+		return (ERROR);
+	elem = (t_elem*)(tmp->content);
+	elem_next = (t_elem*)(tmp->next->content);
+	elem_prev = (t_elem*)(tmp->prev->content);
+	if (elem->nbr < elem_next->nbr)
+		return (SB);
+	else if (elem->nbr < elem_prev->nbr)
+		return (RRB);
+	else
+		return (ERROR);
+}
+
+int	get_instr(int ret_a, int ret_b, int stack)
+{
+	if (ret_a == ERROR && ret_b == ERROR)
+	{
+		if (stack == A)
+			return (PB);
+		if (stack == B)
+			return (PA);
+	}
+	else if (ret_a == SA && ret_b == SB)
+		return (SS);
+	else if (ret_a == RRA && ret_b == RRB)
+		return (RRR);
+	else if (ret_a == SA)
+		return (SA);
+	else if (ret_a == RRA)
+		return (RRA);
+	else if (ret_b == SB)
+		return (SB);
+	else if (ret_b == RRB)
+		return (RRB);
+	return (ERROR);	
+}
+
+int	commit_instruction(t_list **a, t_list **b)
+{
+	void	(*funp[11])();
+	int	instr;
+	int	ret_a;
+	int	ret_b;
+
+	funp_init(funp);
+	ft_lst2c_print(*a);
 	while (check_sorted(*a))
 	{
 
 		while (*a && check_sorted(*a) == ERROR)
 		{
-			tmp = *a;
-			elem = (t_elem*)(tmp->content);
-			elem_next = (t_elem*)(tmp->next->content);
-			elem_prev = (t_elem*)(tmp->prev->content);
-			if (elem->nbr > elem_next->nbr)
-			{
-				swap_a(a, b);
-				ft_printf("sa\n");
-			}
-			else if (elem->nbr > elem_prev->nbr)
-			{
-				rev_rotate_a(a, b);
-				ft_printf("rra\n");
-			}
-			else
-			{
-				push_b(a, b);
-				ft_printf("pb\n");
-			}
+			ret_a = check_a(*a);
+			ret_b = check_b(*b);
+			instr = get_instr(ret_a, ret_b, A);
+			funp[instr](a, b);
+			print_instr(instr);
+		//	ft_lst2c_print(*a);
+		//	ft_lst2c_print(*b);
 		}
 		while (*b)
 		{
-			tmp = *b;
-			elem = (t_elem*)(tmp->content);
-			elem_next = (t_elem*)(tmp->next->content);
-			elem_prev = (t_elem*)(tmp->prev->content);
-			if (elem->nbr > elem_next->nbr)
-			{
-				swap_b(a, b);
-				ft_printf("sb\n");
-			}
-			else if (elem->nbr > elem_prev->nbr)
-			{
-				rev_rotate_b(a, b);
-				ft_printf("rrb\n");
-			}
-			else
-			{
-				push_a(a, b);
-				ft_printf("pa\n");
-			}
-
+			ret_a = check_a(*a);
+			ret_b = check_b(*b);
+			instr = get_instr(ret_a, ret_b, B);
+			funp[instr](a, b);
+			print_instr(instr);
+		//	ft_lst2c_print(*a);
+		//	ft_lst2c_print(*b);
 		}
 	}
 	return (0);

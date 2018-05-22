@@ -24,6 +24,7 @@ LIB_DIR		= ./libft
 
 SRC			= create_stack.c \
 			  utils.c \
+			  print.c \
 			  instructions.c \
 			  push.c \
 			  swap.c \

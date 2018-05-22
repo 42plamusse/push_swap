@@ -12,49 +12,24 @@
 
 #include "utils.h"
 
-void	ft_lst2c_print_rev(t_list *lst)
+/*
+**	Use:	Stores the address of each instruction function into an void array.
+*/
+
+void		funp_init(void (**funp)())
 {
-	t_list		*tmp;
-	t_elem		*elem;
-	int			len;
 
-	if (!lst)
-		return ;
-	len = ft_lst2c_len(lst) + 1;
-	tmp = lst;
-	while (len--)
-	{
-		elem = (t_elem*)tmp->content;
-		ft_printf("%d", elem->nbr);
-		if (len)
-			ft_printf("-");
-		else
-			ft_printf("\n");
-		tmp = tmp->prev;
-	}
-}
-
-void	ft_lst2c_print(t_list *lst)
-{
-	t_list		*tmp;
-	t_elem		*elem;
-	int			len;
-
-	if (!lst)
-		return ;
-	len = ft_lst2c_len(lst);
-	tmp = lst;
-	while (len--)
-	{
-		elem = (t_elem*)tmp->content;
-		ft_printf("%d", elem->nbr);
-		if (len)
-			ft_printf("-");
-		else
-
-			ft_printf("\n");
-		tmp = tmp->next;
-	}
+	funp[PA] = push_a;
+	funp[PB] = &push_b;
+	funp[RA] = &rotate_a;
+	funp[RRA] = &rev_rotate_a;
+	funp[RB] = &rotate_b;
+	funp[RRB] = &rev_rotate_b;
+	funp[SA] = &swap_a;
+	funp[SB] = &swap_b;
+	funp[RR] = &rotate_ab;
+	funp[RRR] = &rev_rotate_ab;
+	funp[SS] = &swap_ab;
 }
 
 int		check_sorted(t_list *a)

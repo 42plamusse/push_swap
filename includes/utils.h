@@ -26,6 +26,8 @@
 # define ERROR			-1
 # define SUCCESS		0
 # define MALLOC_ERROR	NULL
+# define A		1
+# define B		2
 
 /*
 **	STRUCTURES
@@ -40,17 +42,41 @@ typedef struct	s_elem
 }				t_elem;
 
 /*
+**	ENUMS
+*/
+
+enum		instr
+{
+	PA,
+	PB,
+	RA,
+	RRA,
+	RB,
+	RRB,
+	SA,
+	SB,
+	RR,
+	RRR,
+	SS
+};
+
+/*
 **	FUNCTIONS
 */
 
 /*
-**	Utils
+**	utils.c
+*/
+void			funp_init(void (**funp)());
+int			check_sorted(t_list *a);
+/*
+**	print.c
 */
 void			ft_lst2c_print(t_list *lst);
 void			ft_lst2c_print_rev(t_list *lst);
-int			check_sorted(t_list *a);
+void			print_instr(int instr);
 
-int				create_stack(int argc, char *argv[], t_list **a);
+int			create_stack(int argc, char *argv[], t_list **a);
 void			push_a(t_list **a, t_list **b);
 void			push_b(t_list **a, t_list **b);
 void			swap_a(t_list **a, t_list **b);
