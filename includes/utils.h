@@ -39,8 +39,12 @@ typedef struct	s_elem
 	int		pos;
 	int		srtd;
 	int		prio;
-}				t_elem;
+}		t_elem;
 
+typedef struct	s_med
+{
+	
+}		t_med;
 /*
 **	ENUMS
 */

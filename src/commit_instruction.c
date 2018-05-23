@@ -12,7 +12,7 @@ int	check_a(t_list *tmp)
 	elem = (t_elem*)(tmp->content);
 	elem_next = (t_elem*)(tmp->next->content);
 	elem_prev = (t_elem*)(tmp->prev->content);
-	if (elem->nbr > elem_next->nbr)
+	if (elem->nbr > elem_next->nbr && elem_next->nbr < elem_prev->nbr)
 		return (SA);
 	else if (elem->nbr > elem_prev->nbr)
 		return (RRA);
@@ -32,7 +32,7 @@ int	check_b(t_list *tmp)
 	elem = (t_elem*)(tmp->content);
 	elem_next = (t_elem*)(tmp->next->content);
 	elem_prev = (t_elem*)(tmp->prev->content);
-	if (elem->nbr < elem_next->nbr)
+	if (elem->nbr < elem_next->nbr && elem_next->nbr > elem_prev->nbr)
 		return (SB);
 	else if (elem->nbr < elem_prev->nbr)
 		return (RRB);
@@ -83,9 +83,10 @@ int	commit_instruction(t_list **a, t_list **b)
 			instr = get_instr(ret_a, ret_b, A);
 			funp[instr](a, b);
 			print_instr(instr);
-		//	ft_lst2c_print(*a);
-		//	ft_lst2c_print(*b);
+			ft_lst2c_print(*a);
+			ft_lst2c_print(*b);
 		}
+ft_printf("A VIDE OU SORTED\n");
 		while (*b)
 		{
 			ret_a = check_a(*a);
@@ -93,9 +94,10 @@ int	commit_instruction(t_list **a, t_list **b)
 			instr = get_instr(ret_a, ret_b, B);
 			funp[instr](a, b);
 			print_instr(instr);
-		//	ft_lst2c_print(*a);
-		//	ft_lst2c_print(*b);
+			ft_lst2c_print(*a);
+			ft_lst2c_print(*b);
 		}
+ft_printf("B VIDE\n");
 	}
 	return (0);
 }
