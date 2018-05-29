@@ -41,10 +41,6 @@ typedef struct	s_elem
 	int		prio;
 }		t_elem;
 
-typedef struct	s_med
-{
-	
-}		t_med;
 /*
 **	ENUMS
 */
