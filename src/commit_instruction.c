@@ -1,43 +1,233 @@
 #include "push_swap.h"
+//
+//
+//int	check_median_a(t_list *stack, t_opti *op)
+//{
+//	int	*tab;
+//	t_list	*tmp;
+//	int	i;
+//	int	nbr;
+//
+//	if (!stack)
+//		return (ERROR);
+//	if (!(tab = (int*)malloc(sizeof(int) * op->size_stack)))
+//		return (ERROR);
+//	i = 0;
+//	tmp = stack;
+//	nbr = ((t_elem*)tmp->content)->nbr;
+//	while (i < op->size_stack)
+//	{
+//		tab[i++] = ((t_elem*)tmp->content)->nbr;
+//		tmp = tmp->next;
+//	}
+//	sort_tab(tab, op->size_stack);
+//	i = 0;
+//	while (i <= op->med)
+//	{
+//		if (nbr == tab[i++])
+//			return (ISMED);
+//	}
+//	ft_memdel((void**)&tab);
+//	return (ISNOTMED);
+//}
+//
+//int	check_median_b(t_list *stack, t_opti *op)
+//{
+//	int	*tab;
+//	t_list	*tmp;
+//	int	i;
+//	int	nbr;
+//
+//	if (!stack)
+//		return (ERROR);
+//	if (!(tab = (int*)malloc(sizeof(int) * op->size_stack)))
+//		return (ERROR);
+//	i = 0;
+//	tmp = stack;
+//	nbr = ((t_elem*)tmp->content)->nbr;
+//	while (i < op->size_stack)
+//	{
+//		tab[i++] = ((t_elem*)tmp->content)->nbr;
+//		tmp = tmp->next;
+//	}
+//	sort_tab(tab, op->size_stack);
+//	i = op->med;
+//	while (i <= op->size_stack)
+//	{
+//		if (nbr == tab[i++])
+//			return (ISMED);
+//	}
+//	ft_memdel((void**)&tab);
+//	return (ISNOTMED);
+//}
+//
+//int	get_instr(t_list *a, t_list *b, int stack)
+//{
+//	if (stack == A)
+//	{
+//		op.ismed_cur = check_median_a(a, &op);
+//		op.ismed_next = check_median_a(a->next, &op);
+//	}
+//	else if (stack == B)
+//	{
+//		op.ismed_cur = check_median_b(b, &op);
+//		op.ismed_next = check_median_b(b->next, &op);
+//	}
+//	if ((op.ismed_cur && op.ismed_next) || (!op.ismed_cur && !op.ismed_next))
+//	{
+//		if (op.ret_a == SA && op.ret_b == SB)
+//			return (SS);
+//		if (op.ret_a == SA)
+//			return (SA);
+//		if (op.ret_b == SB)
+//			return (SB);
+//	}
+//	if (stack == A)
+//	{
+//		if (op.ret_b == SB)
+//			return (SB);
+//		else if (op.ismed_cur)
+//			return (PB);
+//		else
+//			return (RA);			
+//	}
+//	else if (stack == B)
+//	{
+//		if (op.ret_a == SA)
+//			return (SA);
+//		else if (op.ismed_cur)
+//			return (PA);
+//		else
+//			return (RB);			
+//	}
+//	return (ERROR);	
+//}
+//
 
-int	check_a(t_list *tmp)
+static void	init_opti(t_list *tmp, t_opti *op)
 {
-	t_elem	*elem;
-	t_elem	*elem_next;
-	//t_elem	*elem_prev;
-
-
-	if (!tmp)
-		return (ERROR);
-	elem = (t_elem*)(tmp->content);
-	elem_next = (t_elem*)(tmp->next->content);
-	//elem_prev = (t_elem*)(tmp->prev->content);
-	if (elem->nbr > elem_next->nbr)// && elem_next->nbr < elem_prev->nbr)
-		return (SA);
-	//	else if (elem->nbr > elem_prev->nbr)
-	//		return (RRA);
-	else
-		return (ERROR);
+	op->cur = ((t_elem*)(tmp->content))->srtd;
+	op->next = ((t_elem*)(tmp->next->content))->srtd;
+	op->prev = ((t_elem*)(tmp->prev->content))->srtd;
 }
 
-int	check_b(t_list *tmp)
+int	check_double_instr(int ret_a, int ret_b, int stack)
 {
-	t_elem	*elem;
-	t_elem	*elem_next;
-	//t_elem	*elem_prev;
+	if (ret_a == SA && ret_b == SB)
+		return (SS);
+	else if (ret_a == RA && ret_b == RB)
+		return (RR);
+	else if (ret_a == RRA && ret_b == RRB)
+		return (RRR);
+	else if ((ret_a == PB && ret_b == PA) || (ret_a == PB && ret_b == ERROR))
+	{
+		if (stack == A)
+			return (PB);
+		else if (stack == B)
+			return (PA);
+		
+	}
+	return (ERROR);
+}
 
-
-	if (!tmp)
+int	check_a(t_list *tmp, t_opti *op, int stack)
+{
+	if (!tmp || ft_lst2c_len(tmp) == 1)
 		return (ERROR);
-	elem = (t_elem*)(tmp->content);
-	elem_next = (t_elem*)(tmp->next->content);
-	//elem_prev = (t_elem*)(tmp->prev->content);
-	if (elem->nbr < elem_next->nbr)// && elem_next->nbr > elem_prev->nbr)
-		return (SB);
-	//	else if (elem->nbr < elem_prev->nbr)
-	//		return (RRB);
+	init_opti(tmp, op);
+	if (op->cur < op->med_a || op->med_flag == OVER || stack == B)
+	{
+		if (op->next < op->cur && op->next < op->prev)
+			return (SA);
+		else if (op->prev < op->cur)
+			return (RRA);
+		else
+			return (PB);
+	}
 	else
+	{
+		if (op->prev < op->med_a)
+			return (RRA);
+		else if (op->next > op->med_a && op->next < op->cur)
+			return (SA);
+		else if (ft_lst2c_len(tmp) != 2)
+			return (RA);
+		else
+			return (ERROR);
+	}
+}
+
+int	check_b(t_list *tmp, t_opti *op)
+{
+	if (!tmp || ft_lst2c_len(tmp) == 1)
 		return (ERROR);
+	init_opti(tmp, op);
+	if (op->next > op->cur)
+	{
+		if (op->prev > op->cur)	
+			return (RB);
+		if (op->next > op->prev)
+			return (SB);
+	}
+	else if (op->prev > op->cur)
+		return (RRB);
+	else
+		return (PA);
+//
+//	if (op->cur > op->med_b || op->med_flag == UNDER)
+//	{
+//		if (op->next > op->cur && op->next > op->prev)
+//			return (SB);
+//		else if (op->prev > op->cur)
+//			return (RRB);
+//		else
+//			return (PA);
+//	}
+//	else
+//	{
+//		if (op->prev > op->med_b)
+//			return (RRB);
+//		else if (op->next < op->med_b && op->next > op->cur)
+//			return (SB);
+//		else if (ft_lst2c_len(tmp) != 2)
+//			return (RB);
+//		else
+//			return (ERROR);
+//	}
+}
+
+void	update_median(t_list *a, t_list *b, t_opti *op, int stack)
+{
+	if (stack == A)
+	{
+		op->size_stack = ft_lst2c_len(a);
+		if (op->size_stack <= op->med_a)
+			op->med_flag = OVER;
+	}
+	else
+	{
+		op->size_stack = ft_lst2c_len(b);
+		if (op->size_stack <= op->med_b)
+			op->med_flag = UNDER;
+	}
+
+}
+
+int	get_instr(t_list *a, t_list *b, t_opti *op, int stack)
+{
+	int	ret_a;
+	int	ret_b;
+	int	dbl;
+
+	update_median(a, b, op, stack);	
+	ret_a = check_a(a, op, stack);
+	ret_b = check_b(b, op);
+	if ((dbl = check_double_instr(ret_a, ret_b, stack)) != ERROR)
+		return (dbl);
+	else if (ret_a != PB)
+		return (ret_a);
+	else
+		return (ret_b);
 }
 
 void	sort_tab(int *tab, int len)
@@ -70,11 +260,12 @@ void	sort_tab(int *tab, int len)
 	}
 }
 
-int	check_median_a(t_list *stack, t_opti *op)
+int	sort_label_stack(t_list *stack, t_opti *op)
 {
 	int	*tab;
 	t_list	*tmp;
 	int	i;
+	int	j;
 	int	nbr;
 
 	if (!stack)
@@ -83,7 +274,6 @@ int	check_median_a(t_list *stack, t_opti *op)
 		return (ERROR);
 	i = 0;
 	tmp = stack;
-	nbr = ((t_elem*)tmp->content)->nbr;
 	while (i < op->size_stack)
 	{
 		tab[i++] = ((t_elem*)tmp->content)->nbr;
@@ -91,105 +281,30 @@ int	check_median_a(t_list *stack, t_opti *op)
 	}
 	sort_tab(tab, op->size_stack);
 	i = 0;
-	while (i <= op->med)
-	{
-		if (nbr == tab[i++])
-			return (ISMED);
-	}
-	ft_memdel((void**)&tab);
-	return (ISNOTMED);
-}
-
-int	check_median_b(t_list *stack, t_opti *op)
-{
-	int	*tab;
-	t_list	*tmp;
-	int	i;
-	int	nbr;
-
-	if (!stack)
-		return (ERROR);
-	if (!(tab = (int*)malloc(sizeof(int) * op->size_stack)))
-		return (ERROR);
-	i = 0;
-	tmp = stack;
-	nbr = ((t_elem*)tmp->content)->nbr;
 	while (i < op->size_stack)
 	{
-		tab[i++] = ((t_elem*)tmp->content)->nbr;
+		nbr = ((t_elem*)tmp->content)->nbr;
+		j = 0;
+		while (nbr != tab[j])
+			j++;
+		((t_elem*)tmp->content)->srtd = j;
+		i++;
 		tmp = tmp->next;
-	}
-	sort_tab(tab, op->size_stack);
-	i = op->med;
-	while (i <= op->size_stack)
-	{
-		if (nbr == tab[i++])
-			return (ISMED);
+		
 	}
 	ft_memdel((void**)&tab);
-	return (ISNOTMED);
+	return (SUCCESS);
 }
 
-int	get_instr(t_list *a, t_list *b, int stack)
+void	create_median(t_list *a, t_opti *op)
 {
-	if (stack == A)
-	{
-		op.ismed_cur = check_median_a(a, &op);
-		op.ismed_next = check_median_a(a->next, &op);
-	}
-	else if (stack == B)
-	{
-		op.ismed_cur = check_median_b(b, &op);
-		op.ismed_next = check_median_b(b->next, &op);
-	}
-	if ((op.ismed_cur && op.ismed_next) || (!op.ismed_cur && !op.ismed_next))
-	{
-		if (op.ret_a == SA && op.ret_b == SB)
-			return (SS);
-		if (op.ret_a == SA)
-			return (SA);
-		if (op.ret_b == SB)
-			return (SB);
-	}
-	if (stack == A)
-	{
-		if (op.ret_b == SB)
-			return (SB);
-		else if (op.ismed_cur)
-			return (PB);
-		else
-			return (RA);			
-	}
-	else if (stack == B)
-	{
-		if (op.ret_a == SA)
-			return (SA);
-		else if (op.ismed_cur)
-			return (PA);
-		else
-			return (RB);			
-	}
-	return (ERROR);	
-}
-
-static void	init_opti(t_list *a, t_list *b, t_opti *op)
-{
-	ret_a = 0;
-	ret_b = 0;
-	size_stack = 0;
-	med = 0;
-	cur = 0;
-	next = 0;
-	prev = 0;
-
-	if (stack == A)
-		op->size_stack = ft_lst2c_len(a);
-	if (stack == B)
-		op->size_stack = ft_lst2c_len(b);
-	op->med = op->size_stack / 2;
-	op->ismed_cur = 0;
-	op->ismed_next = 0;
-}
+	op->size_stack = ft_lst2c_len(a);
+	op->med_a = op->size_stack / 2;
+	op->med_b = op->size_stack / 2;
+	op->med_flag = UNDER;
+	//op->med_b = op->med_a / 2;
+	
+}	
 
 int	commit_instruction(t_list **a, t_list **b)
 {
@@ -197,29 +312,28 @@ int	commit_instruction(t_list **a, t_list **b)
 	int	instr;
 	t_opti	op;
 
-	init_opti(a, b, &op);
-	sort_label_stack(*a);
+	create_median(*a, &op);
+	if (sort_label_stack(*a, &op) == ERROR)
+		return (ERROR);
 	funp_init(funp);
-	//ft_lst2c_print(*a);
-	while (check_sorted(*a))
-	{
-		while (*a && check_sorted(*a) == ERROR)
-		{
-			get_median(*a, &op);
-			instr = get_instr(*a, *b, A);
-			funp[instr](a, b);
-			print_instr(instr);
-			//			ft_lst2c_print(*a);
-			//			ft_lst2c_print(*b);
-		}
-		while (*b)
-		{
-			get_median(*b, &op);
-			instr = get_instr(*a, *b, B);
-			funp[instr](a, b);
-			print_instr(instr);
-			//			ft_lst2c_print(*a);
-			//			ft_lst2c_print(*b);
+	ft_lst2c_print(*a);
+      while (check_sorted(*a))
+      {
+      	while (*a && check_sorted(*a) == ERROR)
+      	{
+      		instr = get_instr(*a, *b, &op, A);
+      		funp[instr](a, b);
+      		print_instr(instr);
+						ft_lst2c_print(*a);
+						ft_lst2c_print(*b);
+      	}
+      	while (*b)
+      	{
+      		instr = get_instr(*a, *b, &op, B);
+      		funp[instr](a, b);
+      		print_instr(instr);
+						ft_lst2c_print(*a);
+						ft_lst2c_print(*b);
 		}
 	}
 	return (SUCCESS);
