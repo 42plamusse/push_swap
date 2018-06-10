@@ -69,6 +69,7 @@ enum		instr
 */
 void			funp_init(void (**funp)());
 int			check_sorted(t_list *a);
+int			check_rev_sorted(t_list *a);
 /*
 **	print.c
 */

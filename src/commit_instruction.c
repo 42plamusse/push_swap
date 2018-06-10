@@ -1,340 +1,215 @@
 #include "push_swap.h"
-//
-//
-//int	check_median_a(t_list *stack, t_opti *op)
-//{
-//	int	*tab;
-//	t_list	*tmp;
-//	int	i;
-//	int	nbr;
-//
-//	if (!stack)
-//		return (ERROR);
-//	if (!(tab = (int*)malloc(sizeof(int) * op->size_stack)))
-//		return (ERROR);
-//	i = 0;
-//	tmp = stack;
-//	nbr = ((t_elem*)tmp->content)->nbr;
-//	while (i < op->size_stack)
-//	{
-//		tab[i++] = ((t_elem*)tmp->content)->nbr;
-//		tmp = tmp->next;
-//	}
-//	sort_tab(tab, op->size_stack);
-//	i = 0;
-//	while (i <= op->med)
-//	{
-//		if (nbr == tab[i++])
-//			return (ISMED);
-//	}
-//	ft_memdel((void**)&tab);
-//	return (ISNOTMED);
-//}
-//
-//int	check_median_b(t_list *stack, t_opti *op)
-//{
-//	int	*tab;
-//	t_list	*tmp;
-//	int	i;
-//	int	nbr;
-//
-//	if (!stack)
-//		return (ERROR);
-//	if (!(tab = (int*)malloc(sizeof(int) * op->size_stack)))
-//		return (ERROR);
-//	i = 0;
-//	tmp = stack;
-//	nbr = ((t_elem*)tmp->content)->nbr;
-//	while (i < op->size_stack)
-//	{
-//		tab[i++] = ((t_elem*)tmp->content)->nbr;
-//		tmp = tmp->next;
-//	}
-//	sort_tab(tab, op->size_stack);
-//	i = op->med;
-//	while (i <= op->size_stack)
-//	{
-//		if (nbr == tab[i++])
-//			return (ISMED);
-//	}
-//	ft_memdel((void**)&tab);
-//	return (ISNOTMED);
-//}
-//
-//int	get_instr(t_list *a, t_list *b, int stack)
-//{
-//	if (stack == A)
-//	{
-//		op.ismed_cur = check_median_a(a, &op);
-//		op.ismed_next = check_median_a(a->next, &op);
-//	}
-//	else if (stack == B)
-//	{
-//		op.ismed_cur = check_median_b(b, &op);
-//		op.ismed_next = check_median_b(b->next, &op);
-//	}
-//	if ((op.ismed_cur && op.ismed_next) || (!op.ismed_cur && !op.ismed_next))
-//	{
-//		if (op.ret_a == SA && op.ret_b == SB)
-//			return (SS);
-//		if (op.ret_a == SA)
-//			return (SA);
-//		if (op.ret_b == SB)
-//			return (SB);
-//	}
-//	if (stack == A)
-//	{
-//		if (op.ret_b == SB)
-//			return (SB);
-//		else if (op.ismed_cur)
-//			return (PB);
-//		else
-//			return (RA);			
-//	}
-//	else if (stack == B)
-//	{
-//		if (op.ret_a == SA)
-//			return (SA);
-//		else if (op.ismed_cur)
-//			return (PA);
-//		else
-//			return (RB);			
-//	}
-//	return (ERROR);	
-//}
-//
 
-static void	init_opti(t_list *tmp, t_opti *op)
+void	print_rot(t_rot rot)
 {
-	op->cur = ((t_elem*)(tmp->content))->srtd;
-	op->next = ((t_elem*)(tmp->next->content))->srtd;
-	op->prev = ((t_elem*)(tmp->prev->content))->srtd;
+	ft_printf("rot->best %i\n", rot.best);
+	ft_printf("rot->ra %i\n", rot.ra);
+	ft_printf("rot->rb %i\n", rot.rb);
+	ft_printf("rot->rra %i\n", rot.rra);
+	ft_printf("rot->rrb %i\n", rot.rrb);
+	ft_printf("rot->rr %i\n", rot.rr);
+	ft_printf("rot->rrr %i\n", rot.rrr);
+	ft_printf("\n");
 }
 
-int	check_double_instr(int ret_a, int ret_b, int stack)
+void	compute_rot(t_rot *rot)
 {
-	if (ret_a == SA && ret_b == SB)
-		return (SS);
-	else if (ret_a == RA && ret_b == RB)
-		return (RR);
-	else if (ret_a == RRA && ret_b == RRB)
-		return (RRR);
-	else if ((ret_a == PB && ret_b == PA) || (ret_a == PB && ret_b == ERROR))
-	{
-		if (stack == A)
-			return (PB);
-		else if (stack == B)
-			return (PA);
-		
-	}
-	return (ERROR);
-}
-
-int	check_a(t_list *tmp, t_opti *op, int stack)
-{
-	if (!tmp || ft_lst2c_len(tmp) == 1)
-		return (ERROR);
-	init_opti(tmp, op);
-	if (op->cur < op->med_a || op->med_flag == OVER || stack == B)
-	{
-		if (op->next < op->cur && op->next < op->prev)
-			return (SA);
-		else if (op->prev < op->cur)
-			return (RRA);
-		else
-			return (PB);
-	}
-	else
-	{
-		if (op->prev < op->med_a)
-			return (RRA);
-		else if (op->next > op->med_a && op->next < op->cur)
-			return (SA);
-		else if (ft_lst2c_len(tmp) != 2)
-			return (RA);
-		else
-			return (ERROR);
-	}
-}
-
-int	check_b(t_list *tmp, t_opti *op)
-{
-	if (!tmp || ft_lst2c_len(tmp) == 1)
-		return (ERROR);
-	init_opti(tmp, op);
-	if (op->next > op->cur)
-	{
-		if (op->prev > op->cur)	
-			return (RB);
-		if (op->next > op->prev)
-			return (SB);
-	}
-	else if (op->prev > op->cur)
-		return (RRB);
-	else
-		return (PA);
-//
-//	if (op->cur > op->med_b || op->med_flag == UNDER)
-//	{
-//		if (op->next > op->cur && op->next > op->prev)
-//			return (SB);
-//		else if (op->prev > op->cur)
-//			return (RRB);
-//		else
-//			return (PA);
-//	}
-//	else
-//	{
-//		if (op->prev > op->med_b)
-//			return (RRB);
-//		else if (op->next < op->med_b && op->next > op->cur)
-//			return (SB);
-//		else if (ft_lst2c_len(tmp) != 2)
-//			return (RB);
-//		else
-//			return (ERROR);
-//	}
-}
-
-void	update_median(t_list *a, t_list *b, t_opti *op, int stack)
-{
-	if (stack == A)
-	{
-		op->size_stack = ft_lst2c_len(a);
-		if (op->size_stack <= op->med_a)
-			op->med_flag = OVER;
-	}
-	else
-	{
-		op->size_stack = ft_lst2c_len(b);
-		if (op->size_stack <= op->med_b)
-			op->med_flag = UNDER;
-	}
-
-}
-
-int	get_instr(t_list *a, t_list *b, t_opti *op, int stack)
-{
-	int	ret_a;
-	int	ret_b;
-	int	dbl;
-
-	update_median(a, b, op, stack);	
-	ret_a = check_a(a, op, stack);
-	ret_b = check_b(b, op);
-	if ((dbl = check_double_instr(ret_a, ret_b, stack)) != ERROR)
-		return (dbl);
-	else if (ret_a != PB)
-		return (ret_a);
-	else
-		return (ret_b);
-}
-
-void	sort_tab(int *tab, int len)
-{
+	int	tab[4];
 	int	i;
-	int	j;
-	int	k;
 	int	tmp;
+	int	ret;
 
+	tab[0] = rot->ra + rot->rrb;
+	tab[1] = rot->rb + rot->rra;
+	if (rot->ra >= rot->rb)
+		tab[2] = rot->ra;
+	else
+		tab[2] = rot->rb;
+	if (rot->rra >= rot->rrb)
+		tab[3] = rot->rra;
+	else
+		tab[3] = rot->rrb;
 	i = 0;
-	while (i < len)
-	{
-		j = i + 1;
-		tmp = tab[i];
-		while (j < len)
+	ret = 0;
+	tmp = tab[i];
+	while (i < 4)
+	{	
+		if (tab[i] < tmp)
 		{
-			if (tab[j] < tmp)
-			{
-				tmp = tab[j];
-				k = j;
-			}
-			j++;
-		}
-		if (tmp != tab[i])
-		{
-			tab[k] = tab[i];
-			tab[i] = tmp;
+			tmp = tab[i];
+			ret = i;
 		}
 		i++;
 	}
+	rot->best = tmp;
+	set_rot(rot, ret);
 }
-
-int	sort_label_stack(t_list *stack, t_opti *op)
+void	get_shorter_path(t_list *b, t_opti *op, t_rot *rot)
 {
-	int	*tab;
+	int i;
 	t_list	*tmp;
-	int	i;
-	int	j;
-	int	nbr;
+	int	ret;
 
-	if (!stack)
-		return (ERROR);
-	if (!(tab = (int*)malloc(sizeof(int) * op->size_stack)))
-		return (ERROR);
 	i = 0;
-	tmp = stack;
-	while (i < op->size_stack)
+	tmp = b;
+	ret = ERROR;
+	while (i < op->size_b && ret == ERROR)
 	{
-		tab[i++] = ((t_elem*)tmp->content)->nbr;
+		op->prev = ((t_elem *)(tmp->prev->content))->nbr;
+		op->next = ((t_elem *)(tmp->content))->nbr;
+		if (op->next == op->max)
+		{
+			if (op->cur > op->max || op->cur < op->prev)
+				ret = SUCCESS;
+		}
+		else if (op->cur < op->prev && op->cur > op->next)
+			ret = SUCCESS;
+		if (ret == ERROR)
+			i++;
 		tmp = tmp->next;
 	}
-	sort_tab(tab, op->size_stack);
-	i = 0;
-	while (i < op->size_stack)
-	{
-		nbr = ((t_elem*)tmp->content)->nbr;
-		j = 0;
-		while (nbr != tab[j])
-			j++;
-		((t_elem*)tmp->content)->srtd = j;
-		i++;
-		tmp = tmp->next;
-		
-	}
-	ft_memdel((void**)&tab);
-	return (SUCCESS);
+	rot->rb = i;
+	if (i == 0)
+		rot->rrb = 0;
+	else
+		rot->rrb = op->size_b - i;
+	compute_rot(rot);
 }
 
-void	create_median(t_list *a, t_opti *op)
+void	update_rot(t_opti *op, t_rot rot)
 {
-	op->size_stack = ft_lst2c_len(a);
-	op->med_a = op->size_stack / 2;
-	op->med_b = op->size_stack / 2;
-	op->med_flag = UNDER;
-	//op->med_b = op->med_a / 2;
-	
-}	
+	op->rot.best = rot.best;
+	op->rot.ra = rot.ra;
+	op->rot.rb = rot.rb;
+	op->rot.rra = rot.rra;
+	op->rot.rrb = rot.rrb;
+	op->rot.rr = rot.rr;
+	op->rot.rrr = rot.rrr;
+}
+
+void	get_elem_max(t_list *b, t_opti *op)
+{
+	int	i;
+	t_list	*tmp;
+	int	cur;
+
+	tmp = b;
+	op->max = ((t_elem*)(tmp->content))->nbr;
+	i = 0;
+	while (i < op->size_b)
+	{
+		cur = ((t_elem*)(tmp->content))->nbr;
+		if (cur > op->max)
+			op->max = cur; 
+		tmp = tmp->next;
+		i++;
+	}
+}
+
+void	rot_init(t_rot *rot)
+{
+	rot->best = 0;
+	rot->ra = 0;
+	rot->rra = 0;
+	rot->rb = 0;
+	rot->rrb = 0;
+	rot->rr = 0;
+	rot->rrr = 0;
+}
+
+void	insert_elem(t_list **a, t_list **b, t_opti *op)
+{
+	int	i;
+	t_list	*tmp;
+	t_rot	rot;
+
+	tmp = *a;
+	i = 0;
+	rot_init(&rot);
+	get_elem_max(*b, op);
+	while (i < op->size_a)
+	{
+		op->cur = ((t_elem*)(tmp->content))->nbr;
+		get_shorter_path(*b, op, &rot);
+		if (rot.best < op->rot.best)
+			update_rot(op, rot);
+		tmp = tmp->next;
+		i++;
+		rot.ra = i;
+		rot.rra = op->size_a - i;
+	}
+	i = 0;
+	while (i < op->rot.ra)
+	{
+		rotate_a(a, b);
+		i++;
+	}
+	i = 0;
+	while (i < op->rot.rb)
+	{
+		rotate_b(a, b);
+		i++;
+	}
+	i = 0;
+	while (i < op->rot.rra)
+	{
+		rev_rotate_a(a, b);
+		i++;
+	}
+	i = 0;
+	while (i < op->rot.rrb)
+	{
+		rev_rotate_b(a, b);
+		i++;
+	}
+	i = 0;
+	while (i < op->rot.rr)
+	{
+		rotate_ab(a, b);
+		i++;
+	}
+	i = 0;
+	while (i < op->rot.rrr)
+	{
+		rev_rotate_ab(a, b);
+		i++;
+	}
+	push_b(a, b);
+}
+
+void	opti_update(t_list *a, t_list *b, t_opti *op)
+{
+	op->size_a = ft_lst2c_len(a);
+	op->size_b = ft_lst2c_len(b);
+	op->rot.best = op->size_a + op->size_b;
+	op->rot.ra = 0;
+	op->rot.rra = 0;
+	op->rot.rb = 0;
+	op->rot.rrb = 0;
+	op->rot.rr = 0;
+	op->rot.rrr = 0;
+}
 
 int	commit_instruction(t_list **a, t_list **b)
 {
 	void	(*funp[11])();
-	int	instr;
 	t_opti	op;
 
-	create_median(*a, &op);
-	if (sort_label_stack(*a, &op) == ERROR)
-		return (ERROR);
+	(void)b;
 	funp_init(funp);
+	opti_update(*a, *b, &op);
 	ft_lst2c_print(*a);
-      while (check_sorted(*a))
-      {
-      	while (*a && check_sorted(*a) == ERROR)
-      	{
-      		instr = get_instr(*a, *b, &op, A);
-      		funp[instr](a, b);
-      		print_instr(instr);
-						ft_lst2c_print(*a);
-						ft_lst2c_print(*b);
-      	}
-      	while (*b)
-      	{
-      		instr = get_instr(*a, *b, &op, B);
-      		funp[instr](a, b);
-      		print_instr(instr);
-						ft_lst2c_print(*a);
-						ft_lst2c_print(*b);
-		}
+	//while (op.size_a >= 2 && check_sorted(*a) == ERROR)
+	while (*a)
+	{
+		if (op.size_b < 2)
+			push_b(a, b);
+		else
+			insert_elem(a, b, &op);
+		opti_update(*a, *b, &op);
+ft_lst2c_print(*a);
+ft_lst2c_print(*b);
 	}
+	push_back(a, b, &op);
 	return (SUCCESS);
 }

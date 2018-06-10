@@ -4,14 +4,24 @@
 # define ISNOTMED 0
 # define UNDER 1
 # define OVER 0
+
+typedef struct	s_rot
+{
+	int	best;
+	int	ra;
+	int	rra;
+	int	rb;
+	int	rrb;
+	int	rr;
+	int	rrr;
+}		t_rot;
+
 typedef struct	s_opti
 {
-	int	ret_a;
-	int	ret_b;
-	int	size_stack;
-	int	med_a;
-	int	med_b;
-	int	med_flag;
+	t_rot	rot;
+	int	size_a;
+	int	size_b;
+	int	max;
 	int	cur;
 	int	next;
 	int	prev;
@@ -22,3 +32,4 @@ typedef struct	s_opti
 */
 
 int	commit_instruction(t_list **a, t_list **b);
+void	set_rot(t_rot *rot, int i);
