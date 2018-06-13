@@ -38,6 +38,7 @@ void	push_a(t_list **a, t_list **b)
 		(*a)->prev = tmp;
 	}
 	*a = tmp;
+	ft_printf("pa\n");
 }
 
 void	push_b(t_list **a, t_list **b)
@@ -66,4 +67,5 @@ void	push_b(t_list **a, t_list **b)
 		(*b)->prev = tmp;
 	}
 	*b = tmp;
+	ft_printf("pb\n");
 }

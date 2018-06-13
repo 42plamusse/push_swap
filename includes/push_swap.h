@@ -19,6 +19,7 @@ typedef struct	s_rot
 typedef struct	s_opti
 {
 	t_rot	rot;
+	int	stack;
 	int	size_a;
 	int	size_b;
 	int	max;
@@ -33,3 +34,5 @@ typedef struct	s_opti
 
 int	commit_instruction(t_list **a, t_list **b);
 void	set_rot(t_rot *rot, int i);
+void	get_elem_max(t_list *b, t_opti *op);
+void	push_back(t_list **a, t_list **b, t_opti *op);

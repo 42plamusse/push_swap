@@ -31,7 +31,8 @@ SRC			= create_stack.c \
 			  rotate.c \
 			  rev_rotate.c \
 			  commit_instruction.c \
-				set_rot.c
+				set_rot.c \
+				push_back.c
 				
 
 OBJ			= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
