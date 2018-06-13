@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 19:24:13 by plamusse          #+#    #+#             */
-/*   Updated: 2018/04/25 19:28:55 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/06/13 16:46:50 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ static int		parse_int(char *elem)
 		tmp = tmp * 10 + (elem[i++] - '0');
 	if (elem[i] || (tmp > 2147483647 && sign > 0) ||
 					(tmp > 2147483648 && sign < 0))
-	{
-		ft_perror("too big elem");
 		return (ERROR);
-	}
 	return (SUCCESS);
 }
 
@@ -51,14 +48,14 @@ static t_list	*create_node(char *nbr, t_list **a, int pos)
 	t_list		*new;
 
 	init_elem(&elem, nbr, pos);
-	new = ft_lst2c_push_back(a , ft_lstnew(&elem, sizeof(elem)));
+	new = ft_lst2c_push_back(a, ft_lstnew(&elem, sizeof(elem)));
 	return (new);
 }
 
 static int		stock_elem(char *elem, t_list **a, int pos)
 {
-	t_list	*tmp;
-	t_list	*new;
+	t_list		*tmp;
+	t_list		*new;
 	int			i;
 
 	if (parse_int(elem) == ERROR)
@@ -70,10 +67,7 @@ static int		stock_elem(char *elem, t_list **a, int pos)
 	while (i < pos)
 	{
 		if (((t_elem*)(new->content))->nbr == ((t_elem*)(tmp->content))->nbr)
-		{
-			ft_perror("duplicate");
 			return (ERROR);
-		}
 		i++;
 		tmp = tmp->next;
 	}
@@ -83,16 +77,24 @@ static int		stock_elem(char *elem, t_list **a, int pos)
 int				create_stack(int argc, char *argv[], t_list **a)
 {
 	int			i;
+	char		**tab;
+	int			size;
 
-	i = 1;
-	while (i < argc)
+	tab = &argv[1];
+	size = argc - 1;
+	if (argc == 2)
 	{
-		if (stock_elem(argv[i], a, i) == ERROR)
-		{
-			ft_perror("create stack");
+		tab = ft_strsplit(argv[1], ' ');
+		size = ft_tablen((const char **)tab);
+	}
+	i = 0;
+	while (i < size)
+	{
+		if (stock_elem(tab[i], a, i + 1) == ERROR)
 			return (ERROR);
-		}
 		i++;
 	}
+	if (argc == 2)
+		ft_tabclr(tab);
 	return (SUCCESS);
 }

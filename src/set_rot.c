@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_rot.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/13 15:36:33 by plamusse          #+#    #+#             */
+/*   Updated: 2018/06/13 15:37:30 by plamusse         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static void	rr(t_rot *rot)
@@ -17,8 +29,8 @@ static void	rr(t_rot *rot)
 		rot->rb = rot->rb - rot->ra;
 		rot->ra = 0;
 	}
-		
 }
+
 static void	rrr(t_rot *rot)
 {
 	rot->rr = 0;
@@ -36,8 +48,8 @@ static void	rrr(t_rot *rot)
 		rot->rrb = rot->rrb - rot->rra;
 		rot->rra = 0;
 	}
-		
 }
+
 static void	rb_rra(t_rot *rot)
 {
 	rot->ra = 0;
@@ -54,14 +66,29 @@ static void	ra_rrb(t_rot *rot)
 	rot->rrr = 0;
 }
 
-void	set_rot(t_rot *rot, int i)
+void		set_rot(t_rot *rot, int tab[4])
 {
-	if (i == 0)
+	int	i;
+	int	ret;
+
+	i = 0;
+	ret = 0;
+	rot->best = tab[i];
+	while (i < 4)
+	{
+		if (tab[i] < rot->best)
+		{
+			rot->best = tab[i];
+			ret = i;
+		}
+		i++;
+	}
+	if (ret == 0)
 		ra_rrb(rot);
-	if (i == 1)
+	else if (ret == 1)
 		rb_rra(rot);
-	if (i == 2)
+	else if (ret == 2)
 		rr(rot);
-	if (i == 3)
+	else if (ret == 3)
 		rrr(rot);
 }

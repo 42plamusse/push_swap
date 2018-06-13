@@ -6,7 +6,7 @@
 #    By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/17 14:39:22 by plamusse          #+#    #+#              #
-#    Updated: 2018/04/27 20:53:15 by plamusse         ###   ########.fr        #
+#    Updated: 2018/06/13 14:53:08 by plamusse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,9 @@ SRC			= create_stack.c \
 			  rotate.c \
 			  rev_rotate.c \
 			  commit_instruction.c \
-				set_rot.c \
-				push_back.c
+			  algo.c \
+			  algo_helpers.c \
+			  set_rot.c \
 				
 
 OBJ			= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

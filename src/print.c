@@ -1,7 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/13 15:37:46 by plamusse          #+#    #+#             */
+/*   Updated: 2018/06/13 15:38:16 by plamusse         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "utils.h"
 
-void	print_instr(int instr)
+void	print_instr(t_list **a, t_list **b, void (*funp[11])(), int instr)
 {
+	funp[instr](a, b);
 	if (instr == PA)
 		ft_printf("pa\n");
 	else if (instr == PB)
@@ -65,10 +78,7 @@ void	ft_lst2c_print(t_list *lst)
 		if (len)
 			ft_printf("_");
 		else
-
 			ft_printf("\n");
 		tmp = tmp->next;
 	}
 }
-
-

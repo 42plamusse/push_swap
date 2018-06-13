@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 14:52:05 by plamusse          #+#    #+#             */
-/*   Updated: 2017/09/28 15:06:11 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/06/13 15:28:29 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,3 @@ void	double_lstdel(t_double **a)
 	free(tmp);
 	a = NULL;
 }
-

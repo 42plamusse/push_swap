@@ -1,12 +1,12 @@
-	/* ************************************************************************** */
-	/*                                                                            */
-	/*                                                        :::      ::::::::   */
-	/*   instructions.c                                     :+:      :+:    :+:   */
-	/*                                                    +:+ +:+         +:+     */
-/*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   instructions.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/13 00:55:23 by plamusse          #+#    #+#             */
-/*   Updated: 2018/04/26 18:30:13 by plamusse         ###   ########.fr       */
+/*   Created: 2018/06/13 15:33:47 by plamusse          #+#    #+#             */
+/*   Updated: 2018/06/13 16:42:32 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	Use:	Returns the index corresponding to the instruction in funp array.
 */
 
-static int		instr_index(char *instr)
+static int	instr_index(char *instr)
 {
 	if (!ft_strcmp(instr, "pa"))
 		return (PA);
@@ -43,13 +43,12 @@ static int		instr_index(char *instr)
 	return (ERROR);
 }
 
-
 /*
 **	Use:	Applies all instructions collected from standard input
 **			on both stacks and checks if correctly sorted.
 */
 
-void			exec_instruc(t_list **a, t_list **b)
+void		exec_instruc(t_list **a, t_list **b)
 {
 	void		(*funp[11])();
 	char		*instr;
@@ -60,15 +59,13 @@ void			exec_instruc(t_list **a, t_list **b)
 	i = 0;
 	while ((ret = get_next_line(0, &instr)) > 0 && i != ERROR)
 	{
-		printf("%s\n", instr);
 		if ((i = instr_index(instr)) != ERROR)
 			funp[i](a, b);
-	ft_lst2c_print(*a);
-	ft_lst2c_print(*b);
+		free(instr);
 	}
 	if (ret == ERROR || i == ERROR)
 	{
-		ft_printf("error\n");
+		ft_printf("Error\n");
 		return ;
 	}
 	if (!*b && check_sorted(*a) == SUCCESS)

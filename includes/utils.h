@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 16:30:02 by plamusse          #+#    #+#             */
-/*   Updated: 2018/04/26 17:53:54 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/06/13 15:49:54 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ typedef struct	s_elem
 	int		pos;
 	int		srtd;
 	int		prio;
-}		t_elem;
+}				t_elem;
 
 /*
 **	ENUMS
 */
 
-enum		instr
+enum		e_instr
 {
 	PA,
 	PB,
@@ -68,16 +68,16 @@ enum		instr
 **	utils.c
 */
 void			funp_init(void (**funp)());
-int			check_sorted(t_list *a);
-int			check_rev_sorted(t_list *a);
+int				check_sorted(t_list *tmp);
+int				check_rotate_sorted(t_list *tmp);
 /*
 **	print.c
 */
 void			ft_lst2c_print(t_list *lst);
 void			ft_lst2c_print_rev(t_list *lst);
-void			print_instr(int instr);
-
-int			create_stack(int argc, char *argv[], t_list **a);
+void			print_instr(t_list **a, t_list **b, void (*funp[11])(),
+															int instr);
+int				create_stack(int argc, char *argv[], t_list **a);
 void			push_a(t_list **a, t_list **b);
 void			push_b(t_list **a, t_list **b);
 void			swap_a(t_list **a, t_list **b);

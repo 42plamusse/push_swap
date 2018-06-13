@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 12:19:19 by plamusse          #+#    #+#             */
-/*   Updated: 2018/04/26 18:32:24 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/06/13 13:27:56 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	push_a(t_list **a, t_list **b)
 		(*a)->prev = tmp;
 	}
 	*a = tmp;
-	ft_printf("pa\n");
 }
 
 void	push_b(t_list **a, t_list **b)
@@ -67,5 +66,4 @@ void	push_b(t_list **a, t_list **b)
 		(*b)->prev = tmp;
 	}
 	*b = tmp;
-	ft_printf("pb\n");
 }
