@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 19:24:13 by plamusse          #+#    #+#             */
-/*   Updated: 2018/06/13 16:46:50 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/06/14 15:47:06 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int		parse_int(char *elem)
 	int			i;
 	int			sign;
 
+	if (ft_strlen(elem) > 11)
+		return (ERROR);
 	i = 0;
 	sign = 1;
 	if (elem[i] == '-')

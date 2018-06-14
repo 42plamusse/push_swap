@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 12:19:19 by plamusse          #+#    #+#             */
-/*   Updated: 2018/06/13 13:27:56 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/06/14 16:02:24 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	push_a(t_list **a, t_list **b)
 	t_list	*tmp;
 
 	if (!*b)
-		return ;
+		exit(1);
 	tmp = *b;
 	tmp->prev->next = tmp->next;
 	tmp->next->prev = tmp->prev;
@@ -45,7 +45,7 @@ void	push_b(t_list **a, t_list **b)
 	t_list	*tmp;
 
 	if (!*a)
-		return ;
+		exit(1);
 	tmp = *a;
 	tmp->prev->next = tmp->next;
 	tmp->next->prev = tmp->prev;

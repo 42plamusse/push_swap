@@ -6,14 +6,13 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/10 16:30:02 by plamusse          #+#    #+#             */
-/*   Updated: 2018/06/13 15:49:54 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/06/13 17:01:59 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include "../libft/includes/ft_printf.h"

@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 14:52:04 by plamusse          #+#    #+#             */
-/*   Updated: 2018/06/13 16:56:37 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/06/14 16:10:44 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int			commit_instruction(t_list **a, t_list **b)
 	opti_update(*a, *b, &op);
 	if (op.size_a < 2)
 		return (SUCCESS);
+	if (op.size_a == 3)
+		small_sort(a, b, &op);
 	while (op.size_a >= 2 && check_rotate_sorted(*a) == ERROR)
 	{
 		if (op.size_b < 2)

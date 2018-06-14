@@ -6,7 +6,7 @@
 /*   By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/27 16:00:43 by plamusse          #+#    #+#             */
-/*   Updated: 2018/04/26 17:38:13 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/06/14 16:00:35 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	swap_a(t_list **a, t_list **b)
 	t_list	*second;
 
 	(void)b;
+	if (!*a)
+		exit(1);
 	first = *a;
 	second = first->next;
 	first->prev->next = second;
@@ -35,6 +37,8 @@ void	swap_b(t_list **a, t_list **b)
 	t_list	*second;
 
 	(void)a;
+	if (!*b)
+		exit(1);
 	first = *b;
 	second = first->next;
 	first->prev->next = second;
@@ -48,6 +52,11 @@ void	swap_b(t_list **a, t_list **b)
 
 void	swap_ab(t_list **a, t_list **b)
 {
-	swap_a(a, b);
-	swap_b(a, b);
+	if (*a && *b)
+	{
+		swap_a(a, b);
+		swap_b(a, b);
+	}
+	else
+		exit(1);
 }
